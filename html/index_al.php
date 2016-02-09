@@ -80,7 +80,7 @@
                                     <div class="cont" align="center">
   <div class="demo">
     <div class="login">
-    <form action="login.php" method="POST">
+    <form action="index_al.php" method="POST">
       <div class="login__check"></div>
       <div class="login__form">
         <div class="login__row">
@@ -97,6 +97,54 @@
         </div>
         <input type="submit" class="login__submit" value="Kycu" />
     </form>
+    <?php
+        	//problem nuk krijon cookies.
+
+        	session_start();
+		    if( isset($_POST['email']) && isset($_POST['pw']) ){
+		    	if(empty($_POST['email']) || empty($_POST['pw']))
+		    		echo "Mbushi te dyja fushat per tu kycur!";
+		    	else{
+		    		//to limit connections to the database
+		    		//memcache will be used when we get popular
+		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
+		    			echo "Ti je i kycur nje here!";
+		    		}
+
+		    		else{
+		    			//this will change to a MySQL DB we will buy
+		    			if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+
+			    			
+			    			$email = mysql_escape_string(strtolower(trim($_POST['email'])));
+			    			$pw = mysql_escape_string($_POST['pw']);
+			    			
+			    			//here will go the encryption... Now calculation the strongest encryption I can make.
+			    			
+			    			$res = $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
+			    			$numRows = mysqli_num_rows($res); 
+			    			if($numRows<=0){
+			    				echo "Kombinim email/password i gabuar!";
+			    				session_start();
+			    				$_SESSION['allowed'] = false;
+			    			}
+			    			else{
+			    				$tmp = $res->fetch_assoc();
+			    				session_start();
+			    				$_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
+			    				echo "Logged In";
+			    				//echo "<br> ID:".$tmp['id'];
+			    				echo "<br>";
+			    				$res->free();
+			    			}
+			    		}
+		    			else{
+		    				echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
+		    			}
+		    		}
+		    	}
+		    }
+		?>
         <p class="login__signup">Nuk ke llogari? &nbsp;<a href="krijo_llogari.html">Krijoje</a></p>
         <p class="login__signup" style="margin-top:8px">Harruat fjalekalimin?</p>
         <p class="login__signup"><a><u>Kliko ketu</u></a></p>

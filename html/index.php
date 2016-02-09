@@ -104,7 +104,7 @@
 		    	else{
 		    		//to limit connections to the database
 		    		//memcache will be used when we get popular
-		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != "false"){
+		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
 		    			echo "You are already logged in!";
 		    		}
 
