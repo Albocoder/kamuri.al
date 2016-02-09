@@ -18,7 +18,7 @@
     			//here will go the encryption... Now calculation the strongest encryption I can make.
     			$pw = mysqli_escape_string($_POST['pw']);
 
-    			$res = $conn->query("SELECT email,pw FROM users WHERE email = $email AND pw = $pw");
+    			$res = $conn->query("SELECT email,pw FROM kamuriTBL WHERE email = $email AND pw = $pw");
     			if(empty($res))
     				echo "Invalid email/password";
     			else{
