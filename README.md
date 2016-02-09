@@ -1,4 +1,4 @@
-# kamuri.al
+# Project "kamuri.al" 	&copy; Albocoder    	&copy; ABentertainment
 Ky eshte repository i kamuri.al 
 <hr>
 <h2>Lista e roleve</h2>
