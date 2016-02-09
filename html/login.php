@@ -6,24 +6,30 @@
     		session_start();
     		//to limit connections to the database
     		//memcache will be used when we get popular
-    		if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
+    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] == true){
     			echo "You are already logged in!";
     		}
     		else{
     			//this will change to a MySQL DB we will buy
-    			$conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs");
+    			if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 
-    			
-    			$email = mysqli_escape_string(strtolower(trim($_POST['email'])));
-    			//here will go the encryption... Now calculation the strongest encryption I can make.
-    			$pw = mysqli_escape_string($_POST['pw']);
-
-    			$res = $conn->query("SELECT email,pw FROM kamuriTBL WHERE email = $email AND pw = $pw");
-    			if(empty($res))
-    				echo "Invalid email/password";
+	    			
+	    			echo $email = mysqli_escape_string(strtolower(trim($_POST['email'])));
+	    			echo $pw = mysqli_escape_string($_POST['pw']);
+	    			
+	    			//here will go the encryption... Now calculation the strongest encryption I can make.
+	    			
+	    			$res = $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email = $email AND pw = $pw");
+	    			if(empty($res))
+	    				echo "Invalid email/password";
+	    			else{
+	    				$_SESSION['allowed'] = true;
+	    				echo "Logged In";	
+	    			}
+    			}
     			else{
-    				$_SESSION['logged'] = true;
-    				echo "Logged In";
+    				echo "Couldn't connect to database! Contact the admin <a href="/contactMe.php">here</a> 
+    				if you still see this error after refreshing";
     			}
     		}
     	}
