@@ -42,11 +42,11 @@
 
 /* Stle for Search */
 #tfheader{
-	background-color:#ffefd5;
+	background-color:transparent;
 }
 #tfnewsearch{
 	float:right;
-	padding:20px;
+	padding:10px;
 }
 .tftextinput2{
 	margin: 0;
@@ -89,6 +89,61 @@
 /* Cities list */
 .cities_list {
 	margin-left:28px;
-	margin-top:-43px;
-	border:1px solid #daa520;
+	margin-top:-33px;
+}
+
+/* Restornat list */
+.restorant {
+	margin-left:328px;
+	margin-top:-21px;
+}
+
+/* Meal list */
+.meal {
+	margin-left:628px;
+	margin-top:-21px;
+}
+.Search{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+}
+.news{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+	font-size:bold;
+	letter-spacing:2px;
+}
+
+.offer{
+	border-radius: 8px 8px;
+}
+.footerButton{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+	font-size:bold;
+	letter-spacing:2px;
+	
+}
+.footerButton:hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#EECFCF), to(#d2b48c));
+}
+
+.video{
+	border-radius: 8px 8px;
+}
+.movingText{
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+}
+
+.horizontalLine{
+	padding: 0;
+    border: none;
+    border-top: medium double grey;
+    color: grey;
+    text-align: center;
 }
