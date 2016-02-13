@@ -177,7 +177,7 @@
 								<!-- Vazhdo pa llogari -->
 								<tr>
 									<td width="113" height="28">
-										<a><div align="center"><img alt="Vazhdo" height="48" src="../img/extra/vazhdo.jpg" width="313" /></div></a>
+										<div align="center"><a href="faqja_kryesore.html"><img alt="Vazhdo" height="48" src="../img/extra/vazhdo.jpg" width="313" /></a></div>
 									</td>
 								</tr>
 								<!-- Pjesa e sponsorave -->

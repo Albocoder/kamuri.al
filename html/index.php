@@ -177,7 +177,7 @@
 								<!-- Continue without account -->
 								<tr>
 									<td width="113" height="28">
-										<a><div align="center"><img alt="Continue" height="48" src="../img/extra/continue.jpg" width="313" /></div></a>
+										<div align="center"><a href="home_page.html"><img alt="Continue" height="48" src="../img/extra/continue.jpg" width="313" /></a></div>
 									</td>
 								</tr>
 								<!-- Sponsor part -->
