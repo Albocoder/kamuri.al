@@ -29,7 +29,7 @@ SET time_zone = "+02:00";
 CREATE TABLE IF NOT EXISTS `kamuriTBL` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `pw` varchar(101) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `pw` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `profpic` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `secQ` int(11) NOT NULL,

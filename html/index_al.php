@@ -32,7 +32,7 @@
                     <div align="right">
                     <a>
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="index.html">
+                                    <a href="index.php">
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -98,17 +98,15 @@
         <input type="submit" class="login__submit" value="Kycu" />
     </form>
     <?php
-        	//problem nuk krijon cookies.
-
-        	session_start();
 		    if( isset($_POST['email']) && isset($_POST['pw']) ){
 		    	if(empty($_POST['email']) || empty($_POST['pw']))
 		    		echo "Mbushi te dyja fushat per tu kycur!";
 		    	else{
 		    		//to limit connections to the database
 		    		//memcache will be used when we get popular
+		    		session_start();
 		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
-		    			echo "Ti je i kycur nje here!";
+		    			header('Location: /kamuri.al/html/faqja_kryesore.html');
 		    		}
 
 		    		else{
@@ -132,6 +130,7 @@
 			    				$tmp = $res->fetch_assoc();
 			    				session_start();
 			    				$_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
+			    				header('Location: /kamuri.al/html/faqja_kryesore.html');
 			    				echo "Logged In";
 			    				//echo "<br> ID:".$tmp['id'];
 			    				echo "<br>";

@@ -30,7 +30,7 @@
 						</tr>
 					</table>
                     <div align="right">
-                    <a href="index_al.html">
+                    <a href="index_al.php">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
                                     <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
@@ -97,22 +97,21 @@
         <?php
         	//problem nuk krijon cookies.
 
-        	session_start();
+        	
 		    if( isset($_POST['email']) && isset($_POST['pw']) ){
 		    	if(empty($_POST['email']) || empty($_POST['pw']))
 		    		echo "Fill both fields to login!";
 		    	else{
 		    		//to limit connections to the database
 		    		//memcache will be used when we get popular
+		    		session_start();
 		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
-		    			echo "You are already logged in!";
+		    			header('Location: /kamuri.al/html/home_page.html');
 		    		}
 
 		    		else{
 		    			//this will change to a MySQL DB we will buy
 		    			if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-
-			    			
 			    			$email = mysql_escape_string(strtolower(trim($_POST['email'])));
 			    			$pw = mysql_escape_string($_POST['pw']);
 			    			
@@ -128,7 +127,9 @@
 			    			else{
 			    				$tmp = $res->fetch_assoc();
 			    				session_start();
+			    				session_destroy('allowed');
 			    				$_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
+			    				header('Location: /kamuri.al/html/home_page.html');
 			    				echo "Logged In";
 			    				//echo "<br> ID:".$tmp['id'];
 			    				echo "<br>";
