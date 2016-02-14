@@ -80,7 +80,7 @@
                                     <div class="cont" align="center">
   <div class="demo">
     <div class="login">
-    <form action="index_al.php" method="POST">
+    <form action="login.php" method="POST">
       <div class="login__check"></div>
       <div class="login__form">
         <div class="login__row">
@@ -97,54 +97,7 @@
         </div>
         <input type="submit" class="login__submit" value="Kycu" />
     </form>
-    <?php
-		    if( isset($_POST['email']) && isset($_POST['pw']) ){
-		    	if(empty($_POST['email']) || empty($_POST['pw']))
-		    		echo "Mbushi te dyja fushat per tu kycur!";
-		    	else{
-		    		//to limit connections to the database
-		    		//memcache will be used when we get popular
-		    		session_start();
-		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
-		    			header('Location: /kamuri.al/html/faqja_kryesore.html');
-		    		}
-
-		    		else{
-		    			//this will change to a MySQL DB we will buy
-		    			if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-
-			    			
-			    			$email = mysql_escape_string(strtolower(trim($_POST['email'])));
-			    			$pw = mysql_escape_string($_POST['pw']);
-			    			
-			    			//here will go the encryption... Now calculation the strongest encryption I can make.
-			    			
-			    			$res = $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
-			    			$numRows = mysqli_num_rows($res); 
-			    			if($numRows<=0){
-			    				echo "Kombinim email/password i gabuar!";
-			    				session_start();
-			    				$_SESSION['allowed'] = false;
-			    			}
-			    			else{
-			    				$tmp = $res->fetch_assoc();
-			    				session_start();
-			    				$_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
-			    				header('Location: /kamuri.al/html/faqja_kryesore.html');
-			    				echo "Logged In";
-			    				//echo "<br> ID:".$tmp['id'];
-			    				echo "<br>";
-			    				$res->free();
-			    			}
-			    		}
-		    			else{
-		    				echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
-		    			}
-		    		}
-		    	}
-		    }
-		?>
-        <p class="login__signup">Nuk ke llogari? &nbsp;<a href="krijo_llogari.html">Krijoje</a></p>
+        <p class="login__signup">Nuk ke llogari? &nbsp;<a href="krijo_llogari.php">Krijoje</a></p>
         <p class="login__signup" style="margin-top:8px">Harruat fjalekalimin?</p>
         <p class="login__signup"><a><u>Kliko ketu</u></a></p>
       </div>
@@ -217,7 +170,7 @@
 			<table>
 				<tr>
 					<td>
-						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/erin.avllazagaj">
+						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
 							ABEntertainment </a><font size="2"> Te drejtat e rezervuara</font> 
 						</font>

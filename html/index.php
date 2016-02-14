@@ -81,7 +81,7 @@
     <div class="login">
       <div class="login__check"></div>
       <div class="login__form">
-      <form action="index.php" method="POST">
+      <form action="login.php" method="POST">
         <div class="login__row">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
@@ -94,58 +94,8 @@
           </svg>
           <input type="password" name="pw"class="login__input pass" placeholder="Password"/>
         </div>
-        <?php
-        	//problem nuk krijon cookies.
-
-        	
-		    if( isset($_POST['email']) && isset($_POST['pw']) ){
-		    	if(empty($_POST['email']) || empty($_POST['pw']))
-		    		echo "Fill both fields to login!";
-		    	else{
-		    		//to limit connections to the database
-		    		//memcache will be used when we get popular
-		    		session_start();
-		    		if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
-		    			header('Location: /kamuri.al/html/home_page.html');
-		    		}
-
-		    		else{
-		    			//this will change to a MySQL DB we will buy
-		    			if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-			    			$email = mysql_escape_string(strtolower(trim($_POST['email'])));
-			    			$pw = mysql_escape_string($_POST['pw']);
-			    			
-			    			//here will go the encryption... Now calculation the strongest encryption I can make.
-			    			
-			    			$res = $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
-			    			$numRows = mysqli_num_rows($res); 
-			    			if($numRows<=0){
-			    				echo "Invalid email/password";
-			    				session_start();
-			    				$_SESSION['allowed'] = "false";
-			    			}
-			    			else{
-			    				$tmp = $res->fetch_assoc();
-			    				session_start();
-			    				session_destroy('allowed');
-			    				$_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
-			    				header('Location: /kamuri.al/html/home_page.html');
-			    				echo "Logged In";
-			    				//echo "<br> ID:".$tmp['id'];
-			    				echo "<br>";
-			    				$res->free();
-			    			}
-			    		}
-		    			else{
-		    				echo "Couldn't connect to database! Notify the admins <a href=\"contactMe.php\">here</a> 
-		    				if the problem still exists even after refresh!";
-		    			}
-		    		}
-		    	}
-		    }
-		?>
         <input type="submit" class="login__submit" value="Sign in"/>
-        <p class="login__signup">Don't have an account? &nbsp;<a href="signup.html">Sign up</a></p>
+        <p class="login__signup">Don't have an account? &nbsp;<a href="signup.php">Sign up</a></p>
         <p class="login__signup" style="margin-top:8px">Forgot your password?</p>
         <p class="login__signup"><a><u>Click here</u></a></p>
       </div>
@@ -219,7 +169,7 @@
 			<table>
 				<tr>
 					<td>
-						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/erin.avllazagaj">
+						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
 							ABEntertainment </a><font size="2"> All rights reserved</font> 
 						</font>

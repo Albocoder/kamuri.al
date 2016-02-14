@@ -1,4 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing! 
+<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!");
+require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     <link rel="stylesheet" href="css/style_index.css">  
@@ -30,7 +34,7 @@
 						</tr>
 					</table>
                     <div align="right">
-                    <a href="krijo_llogari.html">
+                    <a href="krijo_llogari.php">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
                                     <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
@@ -185,7 +189,7 @@
 			<table>
 				<tr>
 					<td>
-						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/erin.avllazagaj">
+						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
 							ABEntertainment </a><font size="2"> All rights reserved</font> 
 						</font>

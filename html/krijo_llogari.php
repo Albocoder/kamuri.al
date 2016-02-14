@@ -1,4 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+if (!file_exists('encryptor.php'))die("Dicka shkoi keq ose mungon faqja e krijimit te llogarise! 
+<br>Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!");
+require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     <link rel="stylesheet" href="css/style_index.css">  
@@ -32,7 +36,7 @@
                     <div align="right">
                     <a>
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="signup.html">
+                                    <a href="signup.php">
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -193,7 +197,7 @@
 			<table>
 				<tr>
 					<td>
-						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/erin.avllazagaj">
+						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
 							ABEntertainment </a><font size="2"> Te drejtat e rezervuara</font> 
 						</font>
