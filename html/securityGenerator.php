@@ -44,6 +44,8 @@
 			    else
 			        return bin2hex(substr($output, 0, $key_length));
 			}
+			
+
 			echo $password = pbkdf2('sha512',$_POST['password'],'',1000,50);
 		}
 	?></textarea>
