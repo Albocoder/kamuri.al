@@ -82,10 +82,10 @@ require_once("encryptor.php");?>
 								<tr>
 									<td width="300" height="508">
                                     <div class="cont" align="center">
-  <div class="demo">
-    <div class="login">
-    <p> &nbsp </p>
-    <p> &nbsp </p>
+										<div class="demo">
+											<div class="login">
+												<p> &nbsp </p>
+												<p> &nbsp </p>
     <p class="signup_intro" style="margin-top:6px">Enter your personal details to</p>
     <p class="signup_intro"> <b>create your account</b></p>
          <div class="signup__form">
@@ -115,6 +115,13 @@ require_once("encryptor.php");?>
           </svg>
           <input class="signup_pass" maxlength="30" name="userRepeatPw" id="user-pw-repeat" placeholder="Repeat password" type="text" size="50" />
         </div>
+		<p>&nbsp;</p>
+        <p>&nbsp;</p>
+		<div class="role" >
+		<p> Please Select Your Role <select name="role">
+  <option value="client">Client</option>
+  <option value="business">Business</option>  
+</select> </p> </div>
 		<p>&nbsp;</p>
         <p>&nbsp;</p>
 		<p class="login__signup" align="left"><input class="checkbox" name="checkBox" type="checkbox" value="Agree"/> &nbsp; I agree to &nbsp;<a><u>Terms & Privacy</u></a></p>

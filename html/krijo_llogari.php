@@ -120,6 +120,15 @@ require_once("encryptor.php");?>
 																</div>
 																<p>&nbsp;</p>
 																<p>&nbsp;</p>
+																<div class="role" >
+																	<p> Please Select Your Role <select name="role">
+																		<option value="client">Client</option>
+																		<option value="business">Business</option>  
+																		</select> 
+																	</p> 
+																</div>
+																<p>&nbsp;</p>
+																<p>&nbsp;</p>
 																<p class="login__signup" align="left"><input name="checkBox" class="checkbox" type="checkbox" 
 																value="Agree"/> &nbsp; Une pranoj &nbsp;<a><u>Kushtet & Privatesine</u></a></p>
 																<button type="button" class="signup__submit">Krijo Llogari</button>
