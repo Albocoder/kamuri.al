@@ -95,7 +95,7 @@ require_once("encryptor.php");?>
 																	<svg class="login__icon name svg-icon" viewBox="0 0 20 20">
 																		<path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
 																	</svg>
-																	<input class="signup_email" maxlength="255" id="user-email" placeholder="Email" type="email" 
+																	<input class="signup_email" name="userEmail" maxlength="150" id="user-email" placeholder="Email" type="email" 
 																	size="50" />
 																</div>
 																<p>&nbsp;</p>
@@ -105,7 +105,7 @@ require_once("encryptor.php");?>
 																	<svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
 																		<path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
 																	</svg>
-																	<input class="signup_pass" maxlength="255" id="user-pw" placeholder="Fjalekalimi" type="text" 
+																	<input class="signup_pass" name="userPw" maxlength="30" id="user-pw" placeholder="Fjalekalimi" type="text" 
 																	size="50" />
 																</div>
 																<p>&nbsp;</p>
@@ -115,15 +115,40 @@ require_once("encryptor.php");?>
 																  <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
 																	<path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
 																  </svg>
-																  <input class="signup_pass" maxlength="255" id="user-pw-repeat" 
+																  <input class="signup_pass" name="userRepeatPw" maxlength="30" id="user-pw-repeat" 
 																  placeholder="Perserit Fjalekalimin" type="text" size="50" />
 																</div>
 																<p>&nbsp;</p>
 																<p>&nbsp;</p>
-																<p class="login__signup" align="left"><input class="checkbox" type="checkbox" 
+																<p class="login__signup" align="left"><input name="checkBox" class="checkbox" type="checkbox" 
 																value="Agree"/> &nbsp; Une pranoj &nbsp;<a><u>Kushtet & Privatesine</u></a></p>
 																<button type="button" class="signup__submit">Krijo Llogari</button>
 															</form>
+															<?php
+														      	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
+														      		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
+														      			echo "Plotesoni te gjitha fushat dhe pranoni formalitetet ju lutem!";
+														      		else{
+														      			if($_POST['userPw'] != $_POST['userRepeatPw'])
+														      				echo "Fjalekalimi nuk perputhet!";
+														      			else{
+														  					if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+														                        $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
+														                        $pw = mysql_escape_string($_POST['userPw']);
+														                        //$salt = rand().rand().rand().????; //Create some random salt
+														                        //do some $pw stuff by changing it a little by adding salt.
+														                        $pw = pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false);
+
+														                        //sanitize the database inputs!
+														                        $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
+														                    }
+														                    else{
+														                        echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
+														                    }
+														      			}
+														      		}
+														      	}
+														      ?>
 														</div>
 													</div>
 												</div>
