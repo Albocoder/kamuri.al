@@ -133,7 +133,10 @@
 }
 
 .video{
-	border-radius: 8px 8px;
+	border-radius:8px 8px;
+	position: absolute;
+	right:160px;
+	margin-top:-528px;
 }
 .movingText{
 	font-family:Impact, Charcoal, monospace;
@@ -182,5 +185,14 @@
 .order{
 	position:absolute;
 	right:180px;
-	margin-top:-300px;
+	margin-top:-128px;
+}
+
+.offer2{
+	position: absolute;
+	right:160px;
+	width:380px;
+	height:128px;
+	margin-top:-260px;
+	border-radius:8px 8px;
 }
