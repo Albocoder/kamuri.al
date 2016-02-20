@@ -21,3 +21,9 @@ Ky eshte repository i kamuri.al
 6) What are the first and last letters of your uncle's name?<br>
 7) Which is your favourite food? <br>
 8) What is your girlfriend/boyfriend nickname?<br>
+
+<h2>Todo:</h2>
+1) Rregullo ate headerin "kamuri.al" me 3D etj...<br>
+2) Me shume javascript qe te dali me profesionale<br>
+3) Implemento me shume AJAX me PHP dhe javascript(Per Albocoder-in)<br>
+4) Krijo 2 tabela te tjera si te skica edhe shto 2 kolona me shume te tabela kryesore. (Si te skica)<br>
