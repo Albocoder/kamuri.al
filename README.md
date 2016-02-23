@@ -3,13 +3,10 @@ Ky eshte repository i kamuri.al
 <hr>
 <h2>Lista e roleve</h2>
 1. Owner
-2. Founder
-3. Manager
-4. Sponsor
-5. Client
-6. User
-7. Guest
-8. Developer
+2. Developer
+3. Client
+4. Business
+5. Guest
 <br>
 <hr>
 <h2>Lista e pyetjeve te sigurise</h2>
