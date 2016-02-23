@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
-if (!file_exists('encryptor.php'))die("Dicka shkoi keq ose mungon faqja e krijimit te llogarise! 
+if ((!file_exists('encryptor.php'))||(!file_exists('tracker.php')))die("Dicka shkoi keq ose mungon faqja e krijimit te llogarise! 
 <br>Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!");
 require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -105,7 +105,7 @@ require_once("encryptor.php");?>
 																	<svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
 																		<path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
 																	</svg>
-																	<input class="signup_pass" name="userPw" maxlength="30" id="user-pw" placeholder="Fjalekalimi" type="text" 
+																	<input class="signup_pass" name="userPw" maxlength="30" id="user-pw" placeholder="Fjalekalimi" type="password" 
 																	size="50" />
 																</div>
 																<p>&nbsp;</p>
@@ -116,7 +116,7 @@ require_once("encryptor.php");?>
 																	<path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
 																  </svg>
 																  <input class="signup_pass" name="userRepeatPw" maxlength="30" id="user-pw-repeat" 
-																  placeholder="Perserit Fjalekalimin" type="text" size="50" />
+																  placeholder="Perserit Fjalekalimin" type="password" size="50" />
 																</div>
 																<p>&nbsp;</p>
 																<p>&nbsp;</p>

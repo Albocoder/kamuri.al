@@ -10,7 +10,7 @@
 				$msg = $_POST['msg'];
 				$name = str_replace(" ", "_", $name);
 
-				if(exec("java -cp /var/www/html/kamuri.al/html Mail $email $name $msg", $output)){
+				if(exec("java -cp /var/www/html Mail $email $name $msg", $output)){
 					echo "<font color=\"green\"><br>".htmlentities($name).", your message was sent successfully! 
 					<br>Wait for reply at ".htmlentities($email)."!</font>";	
 				}

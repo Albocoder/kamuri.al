@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
 if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing! 
-<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!");
+<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br><b>Note: </b> You might already have an account in that email.");
 require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -10,6 +10,60 @@ require_once("encryptor.php");?>
 		<meta content="en-us" http-equiv="Content-Language" />
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<title>Kam Uri</title>
+		<?php
+			function get_client_ip_server() {
+		    	$ipaddress = '';
+		    	if ($_SERVER['HTTP_CLIENT_IP'])
+		    	    $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+		    	else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+		    	    $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		    	else if($_SERVER['HTTP_X_FORWARDED'])
+		    	    $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+		    	else if($_SERVER['HTTP_FORWARDED_FOR'])
+		    	    $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+		    	else if($_SERVER['HTTP_FORWARDED'])
+		    	    $ipaddress = $_SERVER['HTTP_FORWARDED'];
+		    	else if($_SERVER['REMOTE_ADDR'])
+		    	    $ipaddress = $_SERVER['REMOTE_ADDR'];
+		    	else
+		    	    $ipaddress = 'UNKNOWN';
+			    return $ipaddress;
+			}
+
+			function get_client_ip_env() {
+		    	$ipaddress = '';
+		    	if (getenv('HTTP_CLIENT_IP'))
+		    	    $ipaddress = getenv('HTTP_CLIENT_IP');
+		    	else if(getenv('HTTP_X_FORWARDED_FOR'))
+		    	    $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+		    	else if(getenv('HTTP_X_FORWARDED'))
+		    	    $ipaddress = getenv('HTTP_X_FORWARDED');
+		    	else if(getenv('HTTP_FORWARDED_FOR'))
+		        	$ipaddress = getenv('HTTP_FORWARDED_FOR');
+		   	 	else if(getenv('HTTP_FORWARDED'))
+		    	    $ipaddress = getenv('HTTP_FORWARDED');
+		    	else if(getenv('REMOTE_ADDR'))
+		       		$ipaddress = getenv('REMOTE_ADDR');
+		    	else
+		        	$ipaddress = 'UNKNOWN';
+		 
+		    	return $ipaddress;
+			}
+
+			function getIP_By_Force(){
+		    	if(strcmp(get_client_ip_server(), 'UNKNOWN') == 0){
+		        	if(strcmp(get_client_ip_env(), 'UNKNOWN') == 0){
+		         	   return 'UNKNOWN';
+		        	}
+		        	else{
+		            	return get_client_ip_env();
+		        	}
+		    	}
+		    	else{
+		     	  	return get_client_ip_server();
+		    	}
+			}
+		?>
 	</head>
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
 	<!-- Header Tab -->
@@ -89,7 +143,7 @@ require_once("encryptor.php");?>
     <p class="signup_intro" style="margin-top:6px">Enter your personal details to</p>
     <p class="signup_intro"> <b>create your account</b></p>
          <div class="signup__form">
-         <form>
+         <form action="signup.php" method="POST">
          <p class="signup_info">Email *</p>
         <div class="signup__row">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
@@ -104,7 +158,7 @@ require_once("encryptor.php");?>
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
           </svg>
-          <input class="signup_pass" maxlength="30" name="userPw" id="user-pw" placeholder="Password" type="text" size="50" />
+          <input class="signup_pass" maxlength="30" name="userPw" id="user-pw" placeholder="Password" type="password" size="50" />
         </div>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -113,7 +167,7 @@ require_once("encryptor.php");?>
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
           </svg>
-          <input class="signup_pass" maxlength="30" name="userRepeatPw" id="user-pw-repeat" placeholder="Repeat password" type="text" size="50" />
+          <input class="signup_pass" maxlength="30" name="userRepeatPw" id="user-pw-repeat" placeholder="Repeat password" type="password" size="50" />
         </div>
 		<p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -128,7 +182,7 @@ require_once("encryptor.php");?>
         <input type="submit" class="signup__submit" value="Sign up"/>
       </div>
       </form>
-      <?php
+      <font size="1"><?php
       	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
       		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
       			echo "Please fill all the fields! And make sure you agree to our formalities!";
@@ -139,20 +193,42 @@ require_once("encryptor.php");?>
   					if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
                         $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
                         $pw = mysql_escape_string($_POST['userPw']);
-                        //$salt = rand().rand().rand().????; //Create some random salt
-                        //do some $pw stuff by changing it a little by adding salt.
-                        $pw = pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false);
 
-                        //sanitize the database inputs!
-                        $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
+                        $salt = genSalt(25);
+                        $totalSalt = $salt;
+                        $salt = genSalt(25);
+                        $pw = $pw.$salt;
+                        $runs = 1828	;
+                        $key_length = 50;
+						$totalSalt = $totalSalt.$salt;
+                        $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
+                        $ip = getIP_By_Force();
+                        $role = $_POST['role'];
+                        $role = trim(strtolower($role));
+                        if(strcmp($role, 'client') == 0)
+                        	$role = 3;
+                        else
+                        	$role = 4;
+
+                        $defaultPic = "userDefault.jpg";
+                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');")){
+                        	echo "Welcome to \"kamuri.al\". It couldn't be the same without you!";
+                        }
+                    	else{
+                    		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
+                    		//or if it was really a crash (almost 0% chance B-) )
+                    		echo "Something is wrong!<br>
+							Notify the admins <a href=\"contactMe.php\">here</a> 
+							if <br>the problem still exists even after refresh!";
+                    	}
                     }
                     else{
-                        echo "Couldn't connect to database! Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!";
+                        echo "Couldn't connect to database! <br>Notify the admins <a href=\"contactMe.php\">here</a> if <br>the problem still exists <br>even after refresh!";
                     }
       			}
       		}
       	}
-      ?>
+      ?></font>
     </div>
   </div>
 </div>
