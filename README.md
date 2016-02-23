@@ -3,13 +3,10 @@ Ky eshte repository i kamuri.al
 <hr>
 <h2>Lista e roleve</h2>
 1. Owner
-2. Founder
-3. Manager
-4. Sponsor
-5. Client
-6. User
-7. Guest
-8. Developer
+2. Developer
+3. Client
+4. Business
+5. Guest
 <br>
 <hr>
 <h2>Lista e pyetjeve te sigurise</h2>
@@ -21,3 +18,9 @@ Ky eshte repository i kamuri.al
 6) What are the first and last letters of your uncle's name?<br>
 7) Which is your favourite food? <br>
 8) What is your girlfriend/boyfriend nickname?<br>
+
+<h2>Todo:</h2>
+1) Rregullo ate headerin "kamuri.al" me 3D etj...<br>
+2) Me shume javascript qe te dali me profesionale<br>
+3) Implemento me shume AJAX me PHP dhe javascript(Per Albocoder-in)<br>
+4) Krijo 2 tabela te tjera si te skica edhe shto 2 kolona me shume te tabela kryesore. (Si te skica)<br>
