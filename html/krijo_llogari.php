@@ -134,25 +134,47 @@ require_once("encryptor.php");?>
 																<button type="button" class="signup__submit">Krijo Llogari</button>
 															</form>
 															<?php
-														      	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
+																if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
 														      		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
-														      			echo "Plotesoni te gjitha fushat dhe pranoni formalitetet ju lutem!";
+														      			echo "Ju lutem plotesoni te gjitha fushat<br>dhe sigurohuni qe te pranoni formalitetet!";
 														      		else{
 														      			if($_POST['userPw'] != $_POST['userRepeatPw'])
-														      				echo "Fjalekalimi nuk perputhet!";
+														      				echo "Fjalekalimet nuk perputhen!";
 														      			else{
 														  					if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														                        $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
 														                        $pw = mysql_escape_string($_POST['userPw']);
-														                        //$salt = rand().rand().rand().????; //Create some random salt
-														                        //do some $pw stuff by changing it a little by adding salt.
-														                        $pw = pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false);
 
-														                        //sanitize the database inputs!
-														                        $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
+														                        $salt = genSalt(25);
+														                        $totalSalt = $salt;
+														                        $salt = genSalt(25);
+														                        $pw = $pw.$salt;
+														                        $runs = 1828;
+														                        $key_length = 50;
+																				$totalSalt = $totalSalt.$salt;
+														                        $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
+														                        $ip = getIP_By_Force();
+														                        $role = $_POST['role'];
+														                        $role = trim(strtolower($role));
+														                        if(strcmp($role, 'client') == 0)
+														                        	$role = 3;
+														                        else
+														                        	$role = 4;
+
+														                        $defaultPic = "userDefault.jpg";
+														                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');")){
+														                        	echo "Miresevini ne \"kamuri.al\". Kjo faqe do ishte e vetmuar pa ju!";
+														                        }
+														                    	else{
+														                    		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
+														                    		//or if it was really a crash (almost 0% chance B-) )
+														                    		echo "Dicka shkoi keq!<br>
+																					Njofto adminat <a href=\"contactMe.php\">ketu</a>.
+																					<br><b>Njoftim: </b>Kjo llogari eshte e regjistruar!";
+														                    	}
 														                    }
 														                    else{
-														                        echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
+														                        echo "Nuk mund te lidhet me databazen! <br>Njofto adminat <a href=\"contactMe.php\">ketu</a>nese <br>problemi ende ekziston <br>edhe pas rifreskimit!<br>";
 														                    }
 														      			}
 														      		}

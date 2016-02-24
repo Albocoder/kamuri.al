@@ -1,5 +1,22 @@
 <?php
-    
+
+    /*
+    $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
+    $pw = mysql_escape_string($_POST['userPw']);
+
+    $totalSalt = $salt;
+    $pw = $pw.$salt;
+    $runs = 1828;
+    $key_length = 50;
+    $totalSalt = $totalSalt.$salt;
+    $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
+    $ip = getIP_By_Force();
+
+    $defaultPic = "userDefault.jpg";
+    if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');"))
+        echo "Miresevini ne \"kamuri.al\". Kjo faqe do ishte e vetmuar pa ju!";
+    */
+
     $lastpage = $_SERVER['HTTP_REFERER'];
     if( isset($_POST['email']) && isset($_POST['pw']) ){
                 if(empty($_POST['email']) || empty($_POST['pw']))

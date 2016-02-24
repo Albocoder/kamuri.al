@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
 if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing! 
-<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br><b>Note: </b> You might already have an account in that email.");
+<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
 require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -182,7 +182,8 @@ require_once("encryptor.php");?>
         <input type="submit" class="signup__submit" value="Sign up"/>
       </div>
       </form>
-      <font size="1"><?php
+      <font size="1">
+      	<?php
       	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
       		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
       			echo "Please fill all the fields! And make sure you agree to our formalities!";
@@ -198,7 +199,7 @@ require_once("encryptor.php");?>
                         $totalSalt = $salt;
                         $salt = genSalt(25);
                         $pw = $pw.$salt;
-                        $runs = 1828	;
+                        $runs = 1828;
                         $key_length = 50;
 						$totalSalt = $totalSalt.$salt;
                         $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
@@ -218,17 +219,18 @@ require_once("encryptor.php");?>
                     		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
                     		//or if it was really a crash (almost 0% chance B-) )
                     		echo "Something is wrong!<br>
-							Notify the admins <a href=\"contactMe.php\">here</a> 
-							if <br>the problem still exists even after refresh!";
+							Notify the admins <a href=\"contactMe.php\">here</a>.
+							<br><b>Note: </b> This account is already registered.";
                     	}
                     }
                     else{
-                        echo "Couldn't connect to database! <br>Notify the admins <a href=\"contactMe.php\">here</a> if <br>the problem still exists <br>even after refresh!";
+                        echo "Couldn't connect to database! <br>Notify the admins <a href=\"contactMe.php\">here</a> if <br>the problem still exists <br>even after refresh!<br>";
                     }
       			}
       		}
       	}
-      ?></font>
+      ?>
+  </font>
     </div>
   </div>
 </div>
