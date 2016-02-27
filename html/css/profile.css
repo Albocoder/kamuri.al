@@ -1,0 +1,210 @@
+.auto-style1 {
+	text-align: right;
+}
+
+.auto-style2 {
+	text-align: left;
+}
+
+.auto-style3 {
+	background-image: url(../../img/extra/cover.jpg);
+}
+.auto-style4 {
+	text-align: center;
+}
+.auto-style5 {
+	border-width: 0px;
+}
+.header_tab {
+	margin-top: 0px; 
+	margin: 0px 0 0 0; 
+	border-top: 0px; 
+	background-position: top; 
+	background: top; 
+	width: 100%; 
+	top: 0px;
+	padding-top: 0px;
+	margin-top:0px;
+}
+.main_tab {
+	margin-top: 0px; 
+	margin: 0px 0 0 0; 
+	border-top: 0px; 
+	background-position: top; 
+	background: top; 
+	width: 100%; 
+	top: 0px;
+	padding-top: 0px;
+	margin-top:0px;
+}
+
+
+
+/* Stle for Search */
+#tfheader{
+	background-color:transparent;
+}
+#tfnewsearch{
+	float:right;
+	padding:10px;
+}
+.tftextinput2{
+	margin: 0;
+	padding: 5px 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#666;
+	border:1px solid #daa520; border-right:0px;
+	border-top-left-radius: 5px 5px;
+	border-bottom-left-radius: 5px 5px;
+}
+.tfbutton2 {
+	margin: 0;
+	padding: 5px 7px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	border: solid 1px #daa520; border-right:0px;
+	background: #daa520;
+	background: -webkit-gradient(linear, left top, left bottom, from(#daa520), to(#ffdead));
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+	border-top-right-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+.tfbutton2:hover {
+	text-decoration: none;
+	background: #bc8f8f;
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+}
+.tfclear{
+	clear:both;
+}
+
+/* Cities list */
+.cities_list {
+	margin-left:28px;
+	margin-top:-33px;
+}
+
+/* Restornat list */
+.restorant {
+	margin-left:328px;
+	margin-top:-21px;
+}
+
+/* Meal list */
+.meal {
+	margin-left:628px;
+	margin-top:-21px;
+}
+.Search{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+}
+.foodName{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+	font-size:bold;
+	letter-spacing:2px;
+}
+
+.offer{
+	border-radius: 8px 8px;
+}
+.footerButton{
+	background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+	font-size:bold;
+	letter-spacing:2px;
+	
+}
+.footerButton:hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#EECFCF), to(#d2b48c));
+}
+
+.video{
+	border-radius:8px 8px;
+	position: absolute;
+	right:160px;
+	margin-top:-528px;
+}
+.movingText{
+	font-family:Impact, Charcoal, monospace;
+	color:#5f3333;
+}
+
+.horizontalLine{
+	padding: 0;
+    border: none;
+    border-top: medium double grey;
+    color: grey;
+    text-align: center;
+}
+.plus {
+    background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+    border: none;
+    color: white;
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.minus {
+    background: -webkit-gradient(linear, left top, left bottom, from(#bc8f8f), to(#d2b48c));
+	border-radius: 8px 8px;
+    border: none;
+    color: white;
+    padding: 4px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.quantity {
+    background: -webkit-gradient(linear, left top, left bottom, from(#5f3333), to(#d2b48c));
+	color: white;
+}
+
+.basket{
+	border: 2px solid #5f3333;
+}
+
+.order{
+	position:absolute;
+	right:180px;
+	margin-top:-128px;
+}
+
+.offer2{
+	position: absolute;
+	right:160px;
+	width:380px;
+	height:128px;
+	margin-top:-260px;
+	border-radius:8px 8px;
+}
+.info{
+	border-left: 2px solid #5f3333;
+}
+
+.prof_table{
+	color: #5f3333;
+	font-size: 18px;
+}
+
+.prof_pic{
+	margin-top: -188px;
+}
