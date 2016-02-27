@@ -195,14 +195,11 @@ require_once("encryptor.php");?>
                         $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
                         $pw = mysql_escape_string($_POST['userPw']);
 
-                        $salt = genSalt(25);
-                        $totalSalt = $salt;
-                        $salt = genSalt(25);
-                        $pw = $pw.$salt;
+                        $salt = genSalt(50);
+                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
                         $runs = 1828;
                         $key_length = 50;
-						$totalSalt = $totalSalt.$salt;
-                        $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
+                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
                         $ip = getIP_By_Force();
                         $role = $_POST['role'];
                         $role = trim(strtolower($role));

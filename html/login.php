@@ -1,75 +1,124 @@
 <?php
-
-    /*
-    $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
-    $pw = mysql_escape_string($_POST['userPw']);
-
-    $totalSalt = $salt;
-    $pw = $pw.$salt;
-    $runs = 1828;
-    $key_length = 50;
-    $totalSalt = $totalSalt.$salt;
-    $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
-    $ip = getIP_By_Force();
-
-    $defaultPic = "userDefault.jpg";
-    if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');"))
-        echo "Miresevini ne \"kamuri.al\". Kjo faqe do ishte e vetmuar pa ju!";
-    */
-
     $lastpage = $_SERVER['HTTP_REFERER'];
-    if( isset($_POST['email']) && isset($_POST['pw']) ){
-                if(empty($_POST['email']) || empty($_POST['pw']))
-                    if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                        echo "Fill both fields to login!";
-                    else
-                        echo "Mbushi te dyja fushat per tu kycur!";
-                else{
-                    //to limit connections to the database
-                    //memcache will be used when we get popular
-                    session_start();
-                    if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
-                        if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                            header('Location: /kamuri.al/html/home_page.html');
-                        else
-                            header('Location: /kamuri.al/html/faqja_kryesore.html');
-                    }
+    if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing! 
+<br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
+require_once("encryptor.php");
 
+    if( isset($_POST['email']) && isset($_POST['pw']) ){
+        if(empty($_POST['email']) || empty($_POST['pw']))
+            if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                echo "Fill both fields to login!";
+            else
+                echo "Mbushi te dyja fushat per tu kycur!";
+        else{
+            //to limit connections to the database
+            //memcache will be used when we get popular
+            session_start();
+            if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
+                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                    header('Location: /kamuri.al/html/home_page.html');
+                else
+                    header('Location: /kamuri.al/html/faqja_kryesore.html');
+            }
+
+            else{
+                //this will change to a MySQL DB we will buy
+                if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+                    $email = mysql_escape_string(strtolower(trim($_POST['email'])));
+                    $pw = mysql_escape_string($_POST['pw']);
+                    
+                    $res = $conn->query("SELECT id,email,pw,kryp FROM kamuriTBL WHERE email='$email';");
+                    $numRows = mysqli_num_rows($res); 
+                    if($numRows<=0){
+                        if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                          echo "Invalid email/password";
+                        else
+                          echo "Kombinim email/password i gabuar!";
+                        $_SESSION['allowed'] = false;
+                    }
                     else{
-                        //this will change to a MySQL DB we will buy
-                        if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-                            $email = mysql_escape_string(strtolower(trim($_POST['email'])));
-                            $pw = mysql_escape_string($_POST['pw']);
-                            
-                            //here will go the encryption... Now calculation the strongest encryption I can make.
-                            
-                            $res = $conn->query("SELECT id,email,pw FROM kamuriTBL WHERE email='$email' AND pw='$pw';");
-                            $numRows = mysqli_num_rows($res); 
-                            if($numRows<=0){
-                                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                  echo "Invalid email/password";
-                                else
-                                  echo "Kombinim email/password i gabuar!";
-                                $_SESSION['allowed'] != false;
-                            }
-                            else{
-                                $tmp = $res->fetch_assoc();
-                                $_SESSION['allowed'] = "Confirmed_ID:".$tmp['id'];
-                                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                    header('Location: /kamuri.al/html/home_page.html');
-                                else
-                                    header('Location: /kamuri.al/html/faqja_kryesore.html');
-                                echo "<br>";
-                                $res->free();
-                            }
+                        $tmp = $res->fetch_assoc();
+                        $salt = $tmp['kryp'];
+                        $encPw = $tmp['pw'];
+                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
+                        $runs = 1828;
+                        $key_length = 50;
+                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
+                        if(strcmp($pw,$encPw)==0){
+                            $ip = getIP_By_Force();
+                            $_SESSION['allowed'] = $tmp['id'];
+                            $res->free();
+                            $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
+                            if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                                header('Location: /kamuri.al/html/home_page.html');
+                            else
+                                header('Location: /kamuri.al/html/faqja_kryesore.html');
                         }
                         else{
-                            if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                    echo "Couldn't connect to database! Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!";
-                                else
-                                    echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
+                            echo "Kombinim email/password i gabuar!";
+                            $res->free();
                         }
                     }
                 }
+                else{
+                    if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                            echo "Couldn't connect to database! Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!";
+                        else
+                            echo "Nuk u be lidhja me databazen! Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!";
+                }
             }
+        }
+    }
+    function get_client_ip_server() {
+        $ipaddress = '';
+        if ($_SERVER['HTTP_CLIENT_IP'])
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if($_SERVER['HTTP_X_FORWARDED'])
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if($_SERVER['HTTP_FORWARDED_FOR'])
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if($_SERVER['HTTP_FORWARDED'])
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if($_SERVER['REMOTE_ADDR'])
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+
+    function get_client_ip_env() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+
+        return $ipaddress;
+    }
+
+    function getIP_By_Force(){
+        if(strcmp(get_client_ip_server(), 'UNKNOWN') == 0){
+            if(strcmp(get_client_ip_env(), 'UNKNOWN') == 0){
+               return 'UNKNOWN';
+            }
+            else{
+                return get_client_ip_env();
+            }
+        }
+        else{
+            return get_client_ip_server();
+        }
+    }
 ?>

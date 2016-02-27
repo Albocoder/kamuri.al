@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
-if ((!file_exists('encryptor.php'))||(!file_exists('tracker.php')))die("Dicka shkoi keq ose mungon faqja e krijimit te llogarise! 
+if (!file_exists('encryptor.php'))die("Dicka shkoi keq ose mungon faqja e krijimit te llogarise! 
 <br>Lajmero adminat <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit!");
 require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -121,9 +121,9 @@ require_once("encryptor.php");?>
 																<p>&nbsp;</p>
 																<p>&nbsp;</p>
 																<div class="role" >
-																	<p> Please Select Your Role <select name="role">
-																		<option value="client">Client</option>
-																		<option value="business">Business</option>  
+																	<p> Ju lutem zgjidhni rolin <select name="role">
+																		<option value="client">Klient</option>
+																		<option value="business">Biznes</option>  
 																		</select> 
 																	</p> 
 																</div>
@@ -145,14 +145,11 @@ require_once("encryptor.php");?>
 														                        $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
 														                        $pw = mysql_escape_string($_POST['userPw']);
 
-														                        $salt = genSalt(25);
-														                        $totalSalt = $salt;
-														                        $salt = genSalt(25);
-														                        $pw = $pw.$salt;
+														                        $salt = genSalt(50);
+                        														$pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
 														                        $runs = 1828;
 														                        $key_length = 50;
-																				$totalSalt = $totalSalt.$salt;
-														                        $pw = pbkdf2('sha512', $pw, $totalSalt,$runs, $key_length,false);
+														                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
 														                        $ip = getIP_By_Force();
 														                        $role = $_POST['role'];
 														                        $role = trim(strtolower($role));
