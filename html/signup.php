@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php 
-if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing! 
+<?php
+if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing!
 <br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
 require_once("encryptor.php");?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-    <link rel="stylesheet" href="css/style_index.css">  
+    <link rel="stylesheet" href="css/style_index.css">
 		<link rel="icon" href="../img/extra/icon.png" type="image/png" sizes="16x16"/>
 		<meta content="en-us" http-equiv="Content-Language" />
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -46,7 +46,7 @@ require_once("encryptor.php");?>
 		       		$ipaddress = getenv('REMOTE_ADDR');
 		    	else
 		        	$ipaddress = 'UNKNOWN';
-		 
+
 		    	return $ipaddress;
 			}
 
@@ -68,7 +68,7 @@ require_once("encryptor.php");?>
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
-			<tr>	
+			<tr>
 				<td style="width: 68px"/>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
@@ -92,20 +92,20 @@ require_once("encryptor.php");?>
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
                                     <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
-                                    
+
                     </div>
-									
+
 					<table class="auto-style3" width="1135" height="200" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="margin-bottom:0px">
-								
+
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
 										<td width="230" style="height: 35px"/>
 										<td width="900" style="height: 35px"/>
 									</tr>
 								</table>
-								
+
 								<br />
 								<br />
 								<br />
@@ -113,22 +113,22 @@ require_once("encryptor.php");?>
 						</tr>
 					</table>
 					<div class="slide"/>
-				</td>			
+				</td>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
-			
+
 		</table>
 		<!-- Main Tab -->
 		<table class="main_tab" cellpadding="0" cellspacing="0" >
-			<tr>	
+			<tr>
 				<td style="width: 68px"/>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table  width="1135" height="1008" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="margin-bottom:0px" width="532">
-								<img alt="" height="908" src="../img/extra/harta.png" width="532" class="auto-style5" />	
+								<img alt="" height="908" src="../img/extra/harta.png" width="532" class="auto-style5" />
 							</td>
 							<td style="margin-bottom:0px" width="113">
 							<table>
@@ -174,7 +174,7 @@ require_once("encryptor.php");?>
 		<div class="role" >
 		<p> Please Select Your Role <select name="role">
   <option value="client">Client</option>
-  <option value="business">Business</option>  
+  <option value="business">Business</option>
 </select> </p> </div>
 		<p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -207,16 +207,22 @@ require_once("encryptor.php");?>
                         	$role = 3;
                         else
                         	$role = 4;
-
+												$verificationCode = genSalt(23);
                         $defaultPic = "userDefault.jpg";
-                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');")){
+												$msg = "Please enter this verification below in the field required!\n\nVerification Code:".$verificationCode;
+                        //add something random in the end as confirmation coder
+												//if(exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+													//forward t another website to enter verification code
+													//or logout
+												//}
+                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."',".$verificationCode.");")){
                         	echo "Welcome to \"kamuri.al\". It couldn't be the same without you!";
                         }
                     	else{
                     		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
                     		//or if it was really a crash (almost 0% chance B-) )
                     		echo "Something is wrong!<br>
-							Notify the admins <a href=\"contactMe.php\">here</a>.
+							Notify the admins <a href=\"contac	tMe.php\">here</a>.
 							<br><b>Note: </b> This account is already registered.";
                     	}
                     }
@@ -250,7 +256,7 @@ require_once("encryptor.php");?>
               </div>
             </a>
           </div>
-                                    
+
 									</td>
 								</tr>
 								<!-- Blank part -->
@@ -283,10 +289,10 @@ require_once("encryptor.php");?>
 									</td>
 								</tr>
 							</table>
-							</td> 
-						</tr> 
+							</td>
+						</tr>
 					</table>
-				</td>			
+				</td>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
@@ -298,7 +304,7 @@ require_once("encryptor.php");?>
 					<td>
 						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
-							ABEntertainment </a><font size="2"> All rights reserved</font> 
+							ABEntertainment </a><font size="2"> All rights reserved</font>
 						</font>
 					</td>
 				</tr>
