@@ -207,27 +207,29 @@ require_once("encryptor.php");?>
                         	$role = 3;
                         else
                         	$role = 4;
-												$verificationCode = genSalt(23);
+
+						$verificationCode = genSalt(6);
                         $defaultPic = "userDefault.jpg";
-												$msg = "Please enter this verification below in the field required!\n\nVerification Code:".$verificationCode;
+						$msg = "ENG{".$verificationCode."}";
+
                         //add something random in the end as confirmation coder
-												//if(exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-													//forward t another website to enter verification code
-													//or logout
-												//}
-                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."',".$verificationCode.");")){
-                        	echo "Welcome to \"kamuri.al\". It couldn't be the same without you!";
-                        }
-                    	else{
-                    		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
-                    		//or if it was really a crash (almost 0% chance B-) )
-                    		echo "Something is wrong!<br>
-							Notify the admins <a href=\"contac	tMe.php\">here</a>.
-							<br><b>Note: </b> This account is already registered.";
-                    	}
+						
+					else{
+	                    if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."',".$verificationCode.");")){
+	                    	echo "Welcome to \"kamuri.al\". It couldn't be the same without you!";
+	                    	if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+								echo "Could not mail a verification code! Please contact us!<br>";	
+							}
+	                    }
+	                	else{
+	                		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
+	                		//or if it was really a crash (almost 0% chance B-) )
+	                		echo "Something is wrong!<br>
+							Notify the admins if problem persists!<br>";
+	                	}
                     }
                     else{
-                        echo "Couldn't connect to database! <br>Notify the admins <a href=\"contactMe.php\">here</a> if <br>the problem still exists <br>even after refresh!<br>";
+                        echo "Couldn't connect to database! <br>Notify the admins if problem persists!<br>";
                     }
       			}
       		}
@@ -310,5 +312,14 @@ require_once("encryptor.php");?>
 				</tr>
 			</table>
 		</center>
+<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3oCvTTmmbbkiGGxmDvAaDLWL9xJq0esF";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zopim Live Chat Script-->
 	</body>
 </html>

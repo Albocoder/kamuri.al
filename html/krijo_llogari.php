@@ -157,11 +157,16 @@ require_once("encryptor.php");?>
 														                        	$role = 3;
 														                        else
 														                        	$role = 4;
-
-														                        $defaultPic = "userDefault.jpg";
-														                        if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."');")){
-														                        	echo "Miresevini ne \"kamuri.al\". Kjo faqe do ishte e vetmuar pa ju!";
-														                        }
+																				$verificationCode = genSalt(6);
+															                    $defaultPic = "userDefault.jpg";
+																				$msg = "ALB{".$verificationCode."}";
+																							
+															                    if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."',".$verificationCode.");")){
+															                    	echo "Miresevini ne \"kamuri.al\". Kjo faqe do ishte e vetmuar pa ju!";
+															                    	if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+																						echo "Nuk mund te dergonim nje kod verifikimi ne email. Ju lutemi na kontaktoni ne!<br>";	
+																					}
+															                    }
 														                    	else{
 														                    		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
 														                    		//or if it was really a crash (almost 0% chance B-) )
@@ -259,4 +264,13 @@ require_once("encryptor.php");?>
 			</table>
 		</center>
 	</body>
+<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3oCvTTmmbbkiGGxmDvAaDLWL9xJq0esF";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zopim Live Chat Script-->
 </html>
