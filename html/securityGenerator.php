@@ -6,6 +6,10 @@
 	</form>
 	<hr>
 	<textarea rows="2" cols="105"><?php
+		session_start();
+		if($_SESSION['allowed']==false || $_SESSION['allowed']=="")
+			header('Location: login.php');// ob_start() ob_end_clean()
+
 		if(isset($_POST['password'])&& !empty($_POST['password'])){
 			function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
 			{

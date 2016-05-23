@@ -16,16 +16,16 @@ require_once("encryptor.php");
             session_start();
             if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
                 if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                    header('Location: /kamuri.al/html/home_page.html');
+                    header('Location: home_page.html');
                 else
-                    header('Location: /kamuri.al/html/faqja_kryesore.html');
+                    header('Location: faqja_kryesore.html');
             }
 
             else{
                 //this will change to a MySQL DB we will buy
                 if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-                    $email = mysql_escape_string(strtolower(trim($_POST['email'])));
-                    $pw = mysql_escape_string($_POST['pw']);
+                    $email = $conn->real_escape_string(strtolower(trim($_POST['email'])));
+                    $pw = $conn->real_escape_string($_POST['pw']);
 
                     $res = $conn->query("SELECT id,email,pw,kryp FROM kamuriTBL WHERE email='$email';");
                     $numRows = mysqli_num_rows($res);
@@ -51,9 +51,9 @@ require_once("encryptor.php");
                             $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
                             //here check for status and redirect accordingly
                             if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                header('Location: /kamuri.al/html/home_page.html');
+                                header('Location: home_page.html');
                             else
-                                header('Location: /kamuri.al/html/faqja_kryesore.html');
+                                header('Location: faqja_kryesore.html');
                         }
                         else{
                             echo "Kombinim email/password i gabuar!";

@@ -188,52 +188,48 @@ require_once("encryptor.php");?>
       		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
       			echo "Please fill all the fields! And make sure you agree to our formalities!";
       		else{
-      			if($_POST['userPw'] != $_POST['userRepeatPw'])
-      				echo "Input password mismatch!";
-      			else{
-  					if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-                        $email = mysql_escape_string(strtolower(trim($_POST['userEmail'])));
-                        $pw = mysql_escape_string($_POST['userPw']);
+	      			if($_POST['userPw'] != $_POST['userRepeatPw'])
+	      				echo "Input password mismatch!";
+	      			else{
+	  					if($conn = mysqli_connect("127.0.0.1", "root", "Asdf!234","myDBs")){
+	                        $email = $conn->real_escape_string(strtolower(trim($_POST['userEmail'])));
+	                        $pw = $conn->real_escape_string($_POST['userPw']);
 
-                        $salt = genSalt(50);
-                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
-                        $runs = 1828;
-                        $key_length = 50;
-                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
-                        $ip = getIP_By_Force();
-                        $role = $_POST['role'];
-                        $role = trim(strtolower($role));
-                        if(strcmp($role, 'client') == 0)
-                        	$role = 3;
-                        else
-                        	$role = 4;
+	                        $salt = genSalt(50);
+	                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
+	                        $runs = 1828;
+	                        $key_length = 50;
+	                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
+	                        $ip = getIP_By_Force();
+	                        $role = $_POST['role'];
+	                        $role = trim(strtolower($role));
+	                        if(strcmp($role, 'client') == 0)
+	                        	$role = 3;
+	                        else
+	                        	$role = 4;
 
-						$verificationCode = genSalt(6);
-                        $defaultPic = "userDefault.jpg";
-						$msg = "ENG{".$verificationCode."}";
-
-                        //add something random in the end as confirmation coder
-						
-					else{
-	                    if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','','','','','".$role."',".$verificationCode.");")){
-	                    	echo "Welcome to \"kamuri.al\". It couldn't be the same without you!";
-	                    	if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-								echo "Could not mail a verification code! Please contact us!<br>";	
-							}
-	                    }
-	                	else{
-	                		//later we open a DB for this crash. Crash handling DB to identify if he was doing some evil shit
-	                		//or if it was really a crash (almost 0% chance B-) )
-	                		echo "Something is wrong!<br>
-							Notify the admins if problem persists!<br>";
-	                	}
-                    }
-                    else{
-                        echo "Couldn't connect to database! <br>Notify the admins if problem persists!<br>";
-                    }
-      			}
-      		}
-      	}
+							$verificationCode = genSalt(6);
+	                        $defaultPic = "userDefault.jpg";
+							$msg = "ENG{".$verificationCode."}";
+              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','-1','-1','','','".$role."','".$verificationCode."');")){
+	            				if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+									echo "Could not mail a verification code! Please contact us to verify your account!<br>";
+								}
+	              				else{
+	              					echo "Welcome to kamuri.al! Please check the email for verification code now!";
+									header('Location: home_page.html'); 
+	              				}
+	              			}
+              				else{
+                  				echo "Email is already registered! <br>Notify the admins if problem persists!<br>";
+             				}
+	      				}
+	      				else{
+	      					echo "Couldn't connect to database! <br>Notify the admins if problem persists!";
+	      				}
+      				}
+				}
+			}
       ?>
   </font>
     </div>
@@ -312,14 +308,18 @@ require_once("encryptor.php");?>
 				</tr>
 			</table>
 		</center>
-<!--Start of Zopim Live Chat Script-->
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="//v2.zopim.com/?3oCvTTmmbbkiGGxmDvAaDLWL9xJq0esF";z.t=+new Date;$.
-type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
-<!--End of Zopim Live Chat Script-->
+<!--End of Tawk.to Script-->
 	</body>
 </html>
