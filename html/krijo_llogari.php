@@ -158,6 +158,7 @@ function get_client_ip_server() {
 														<p> &nbsp </p>
 														<p class="signup_intro" style="margin-top:6px">Shkruani te dhenat personale per</p>
 														<p class="signup_intro"> <b>te krijuar llogarine</b></p>
+														<font size="1">
 														<?php
 														      	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
 														      		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
@@ -185,8 +186,10 @@ function get_client_ip_server() {
 
 																					$verificationCode = genSalt(6);
 															                        $defaultPic = "userDefault.jpg";
+															                        $numTries = 5;
 																					$msg = "ALB{".$verificationCode."}";
-														              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','-1','-1','','','".$role."','".$verificationCode."');")){
+														              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
+														              					.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
 															            				if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
 																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
 																						}
@@ -206,6 +209,7 @@ function get_client_ip_server() {
 																		}
 																	}
 														      ?>
+														</font>
 														<div class="signup__form">
 															<form method="POST" action="krijo_llogari.php">
 																<p class="signup_info">Email *</p>

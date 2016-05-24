@@ -211,7 +211,10 @@ require_once("encryptor.php");?>
 							$verificationCode = genSalt(6);
 	                        $defaultPic = "userDefault.jpg";
 							$msg = "ENG{".$verificationCode."}";
-              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','".$defaultPic."','-1','-1','','','".$role."','".$verificationCode."');")){
+							$numTries = 5;
+              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
+								.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
+	            				
 	            				if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
 									echo "Could not mail a verification code! Please contact us to verify your account!<br>";
 								}

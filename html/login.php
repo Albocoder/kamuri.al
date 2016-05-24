@@ -14,7 +14,7 @@ require_once("encryptor.php");
             //to limit connections to the database
             //memcache will be used when we get popular
             session_start();
-            if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
+            if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false && $_SESSION['verified']){
                 if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
                     header('Location: home_page.html');
                 else
@@ -27,7 +27,8 @@ require_once("encryptor.php");
                     $email = $conn->real_escape_string(strtolower(trim($_POST['email'])));
                     $pw = $conn->real_escape_string($_POST['pw']);
 
-                    $res = $conn->query("SELECT id,email,pw,kryp FROM kamuriTBL WHERE email='$email';");
+                    $res = $conn->query("SELECT id,email,pw,kryp,verificationCode
+                     FROM kamuriTBL WHERE email='$email';");
                     $numRows = mysqli_num_rows($res);
                     if($numRows<=0){
                         if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
@@ -46,6 +47,12 @@ require_once("encryptor.php");
                         $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
                         if(strcmp($pw,$encPw)==0){
                             $ip = getIP_By_Force();
+                            //if the user's account is still unverified!
+                            if(!is_null($tmp['verificationCode'])){
+                                $_SESSION['allowed'] = true;
+                                $_SESSION['verified'] = false;
+                                header("Location: verify.php");
+                            }
                             $_SESSION['allowed'] = $tmp['id'];
                             $res->free();
                             $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
