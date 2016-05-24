@@ -194,8 +194,8 @@ function get_client_ip_server() {
 																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
 																						}
 															              				else{
-															              					echo "Miresevjen ne kamuri.al! Ju lutem kontrolloni emailin per kodin e verifikimit!";
-																							header('Location: faqja_kryesore.html'); 
+															              					echo "Kodi verifikimit u dergua. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
+															              					echo '<meta http-equiv="refresh" content="5;url= verify.php" />';
 															              				}
 															              			}
 														              				else{

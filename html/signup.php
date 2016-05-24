@@ -219,8 +219,8 @@ require_once("encryptor.php");?>
 									echo "Could not mail a verification code! Please contact us to verify your account!<br>";
 								}
 	              				else{
-	              					echo "Welcome to kamuri.al! Please check the email for verification code now!";
-									header('Location: home_page.html'); 
+	              					echo "Welcome to kamuri.al it couldn't be the same without you! Please check the email for verification code!";
+									echo '<meta http-equiv="refresh" content="5;url= verify.php" />';
 	              				}
 	              			}
               				else{
