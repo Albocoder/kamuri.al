@@ -18,7 +18,6 @@ function Total(qty,ud,total,value){
 	</head>
     <?php
 		session_start();
-		/*
 		if((!isset($_SESSION['allowed']))
 			||(isset($_SESSION['allowed']) && !$_SESSION['allowed']) 
 			|| ($_SESSION['allowed'] && !$_SESSION['verified']))
@@ -26,9 +25,47 @@ function Total(qty,ud,total,value){
 		else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
 			header("Location: verify.php");
 		else{
-
-		}
-		*/
+				if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+						$uid = $_SESSION['id'];
+                    	$res = $conn->query("SELECT profpic,email
+                     		FROM kamuriTBL WHERE id = '$uid';");
+                        $tmp = $res->fetch_assoc();
+                        $salt = $tmp['kryp'];
+                        $encPw = $tmp['pw'];
+                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
+                        $runs = 1828;
+                        $key_length = 50;
+                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
+                        if(strcmp($pw,$encPw)==0){
+                            $ip = getIP_By_Force();
+                            $_SESSION['allowed'] = true;
+                            $_SESSION['id'] = $tmp['id'];
+                            $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
+                            //if the user's account is still unverified!
+                            if(strcmp($tmp['status'],'pen')==0){
+                                $_SESSION['verified'] = false;
+                                header("Location: verify.php");
+                            }
+                            else{
+                                $_SESSION['verified'] = true;
+                                $res->free();
+                                //here check for status and redirect accordingly
+                                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                                    header('Location: home_page.html');
+                                else
+                                    header('Location: faqja_kryesore.html');
+                            }
+                        }
+                        else{
+                            echo "Kombinim email/password i gabuar!";
+                            $res->free();
+                        }
+                    }
+            else{
+                echo "Couldn't connect to database! Notify the admins
+                <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!";
+                }
+            }
     ?>
     
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
