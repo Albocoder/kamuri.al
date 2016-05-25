@@ -14,8 +14,8 @@
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>	
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -29,13 +29,13 @@
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
                     <a>
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="business_homepage">
+                                    <a href="business_homepage.html">
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -46,8 +46,8 @@
 								
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 								
@@ -59,7 +59,7 @@
 						
 					</table>
 				</td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 			
@@ -73,21 +73,22 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, Albocoder<class name="exit" class="exit">
-								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"></class></div>
+                            	<div style="margin-left:20px;">Hi, Albocoder<div name="exit" class="exit">
+								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
+															  alt="Turn Off"></div></div>
     						</td>
                         </tr>
                         <!-- Empty row -->
-						
+
 					</table>
+
 					<center><table border="1" class="verification_table""><tr><td>
-					<p><center class="hello" margin-top="50px">Hello <class name="user"> Albocoder </class> </center></p>
-					<p><center class="code_text" margin-top="50px">Please enter verification </center></p>
-					<p><center class="code_text" margin-top="50px">code below... </center></p>
-					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries">8</class></center></p>
-					<p><center class="code_text" margin-top="50px"><form><input type="text" name="verification_code" placeholder="Verification Code"/></form></center></p>
-					<p><center class="code_text" margin-top="50px"><form><input type="submit" name="submit_verification" /></form></center></p></td></tr></table></center></td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+					<p><center class="hello" margin-top="50px">Hello <class name="user"> Albocoder </class> </center>
+					<p><center class="code_text" margin-top="50px">Please enter verification </center>
+					<p><center class="code_text" margin-top="50px">code below... </center>
+					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries">8</class></center>
+					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
+					<p><center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center></p></td></tr></table>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
-			</tr>
-		</table>
+	</body>
