@@ -1,16 +1,34 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-    <link rel="stylesheet" href="css/style_index.css">  
+    <link rel="stylesheet" href="css/style_index.css">
 		<link rel="icon" href="../img/extra/icon.png" type="image/png" sizes="16x16"/>
 		<meta content="en-us" http-equiv="Content-Language" />
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<title>Kam Uri</title>
 	</head>
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
+		<!-- Facebook Like Script -->
+		<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '1006744256080284',
+				xfbml      : true,
+				version    : 'v2.6'
+			});
+		};
+		(function(d, s, id){
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+		 }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<!-- End of Facebook Like Script -->
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
-			<tr>	
+			<tr>
 				<td style="width: 68px"/>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
@@ -34,42 +52,42 @@
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
                                     <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
-                                    
+
                     </div>
-									
+
 					<table class="auto-style3" width="1135" height="200" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="margin-bottom:0px">
-								
+
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
 										<td width="230" style="height: 35px"/>
 										<td width="900" style="height: 35px"/>
 									</tr>
 								</table>
-								
+
 								<br />
 								<br />
 								<br />
 							</td>
 						</tr>
 					</table>
-				</td>			
+				</td>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
-			
+
 		</table>
 		<!-- Main Tab -->
 		<table class="main_tab" cellpadding="0" cellspacing="0" >
-			<tr>	
+			<tr>
 				<td style="width: 68px"/>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table  width="1135" height="1008" cellpadding="0" cellspacing="0">
 						<tr>
 							<td style="margin-bottom:0px" width="532">
-								<img alt="" height="908" src="../img/extra/harta.png" width="532" class="auto-style5" />	
+								<img alt="" height="908" src="../img/extra/harta.png" width="532" class="auto-style5" />
 							</td>
 							<td style="margin-bottom:0px" width="113">
 							<table>
@@ -122,7 +140,7 @@
               </div>
             </a>
           </div>
-                                    
+
 									</td>
 								</tr>
 								<!-- Continue without account -->
@@ -156,10 +174,10 @@
 									</td>
 								</tr>
 							</table>
-							</td> 
-						</tr> 
+							</td>
+						</tr>
 					</table>
-				</td>			
+				</td>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
@@ -171,11 +189,30 @@
 					<td>
 						<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 							AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
-							ABEntertainment </a><font size="2"> All rights reserved</font> 
+							ABEntertainment </a><font size="2"> All rights reserved</font>
 						</font>
 					</td>
 				</tr>
+				<tr><td>	<div
+				class="fb-like"
+				data-share="true"
+				data-width="450"
+				data-show-faces="true">
+				</div></td></tr>
 			</table>
 		</center>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 	</body>
 </html>

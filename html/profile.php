@@ -5,7 +5,6 @@
 	<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
     <link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
-    
 		<title>Kam Uri</title>
 		<!-- This script is for the quantity Price relation -->
 		 <script>
@@ -17,7 +16,13 @@ function Total(qty,ud,total,value){
 }
   </script>
 	</head>
-    
+    <?php
+		session_start();
+		if((!isset($_SESSION['allowed']))
+			||(isset($_SESSION['allowed']) && !$_SESSION['allowed']) 
+			|| ($_SESSION['allowed'] && !$_SESSION['verified'])
+			header("Location: index.php");
+    ?>
     
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
 	<!-- Header Tab -->
@@ -42,9 +47,9 @@ function Total(qty,ud,total,value){
 						</tr>
 					</table>
                     <div align="right">
-                    <a >
+                    <a href="profile_al.html">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="profile.html">
+                                    <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -113,18 +118,18 @@ function Total(qty,ud,total,value){
 													<p class="name">Argert Boja</p>
 													<p class= "email"> argertboja@yahoo.com</p>
 													<form>
-														<p>Ditelindja:
+														<p>Birthday:
 														
 															<input type="date" name="bday">
 														</p>
-														<p>Adresa: 
-															<textarea name="comment" form="usrform" placeholder="Shkruani adresen tuaj" rows="8" cols="28" name="adress"></textarea>
+														<p>Adress: 
+															<textarea name="comment" form="usrform" placeholder="Enter your adress" rows="8" cols="28" name="adress"></textarea>
 														</p>
-														<p>Telefon:
+														<p>Telephone:
 															<input type="tel" name="usrtel">
 														</p>
 														<p>
-															<input type="submit" value="Dergo!">
+															<input type="submit">
 														</p>
 													</form>												
 												</center>
@@ -184,5 +189,18 @@ function Total(qty,ud,total,value){
 				</tr>
 			</table>
 		</center>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 	</body>
 </html>

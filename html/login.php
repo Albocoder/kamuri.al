@@ -14,20 +14,21 @@ require_once("encryptor.php");
             //to limit connections to the database
             //memcache will be used when we get popular
             session_start();
-            if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false){
+            if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false && isset($_SESSION['allowed'])
+                && $_SESSION['verified']){
                 if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                    header('Location: /kamuri.al/html/home_page.html');
+                    header('Location: home_page.html');
                 else
-                    header('Location: /kamuri.al/html/faqja_kryesore.html');
+                    header('Location: faqja_kryesore.html');
             }
 
             else{
                 //this will change to a MySQL DB we will buy
                 if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
-                    $email = mysql_escape_string(strtolower(trim($_POST['email'])));
-                    $pw = mysql_escape_string($_POST['pw']);
-
-                    $res = $conn->query("SELECT id,email,pw,kryp FROM kamuriTBL WHERE email='$email';");
+                    $email = $conn->real_escape_string(strtolower(trim($_POST['email'])));
+                    $pw = $conn->real_escape_string($_POST['pw']);
+                    $res = $conn->query("SELECT id,email,pw,kryp,verificationCode
+                     FROM kamuriTBL WHERE email='$email';");
                     $numRows = mysqli_num_rows($res);
                     if($numRows<=0){
                         if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
@@ -46,14 +47,23 @@ require_once("encryptor.php");
                         $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
                         if(strcmp($pw,$encPw)==0){
                             $ip = getIP_By_Force();
-                            $_SESSION['allowed'] = $tmp['id'];
-                            $res->free();
+                            $_SESSION['allowed'] = true;
+                            $_SESSION['id'] = $tmp['id'];
                             $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
-                            //here check for status and redirect accordingly
-                            if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                header('Location: /kamuri.al/html/home_page.html');
-                            else
-                                header('Location: /kamuri.al/html/faqja_kryesore.html');
+                            //if the user's account is still unverified!
+                            if(!is_null($tmp['verificationCode'])){
+                                $_SESSION['verified'] = false;
+                                header("Location: verify.php");
+                            }
+                            else{
+                                $_SESSION['verified'] = true;
+                                $res->free();
+                                //here check for status and redirect accordingly
+                                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                                    header('Location: home_page.html');
+                                else
+                                    header('Location: faqja_kryesore.html');
+                            }
                         }
                         else{
                             echo "Kombinim email/password i gabuar!";
