@@ -18,10 +18,17 @@ function Total(qty,ud,total,value){
 	</head>
     <?php
 		session_start();
+		/*
 		if((!isset($_SESSION['allowed']))
 			||(isset($_SESSION['allowed']) && !$_SESSION['allowed']) 
-			|| ($_SESSION['allowed'] && !$_SESSION['verified'])
+			|| ($_SESSION['allowed'] && !$_SESSION['verified']))
 			header("Location: index.php");
+		else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
+			header("Location: verify.php");
+		else{
+
+		}
+		*/
     ?>
     
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
@@ -115,7 +122,7 @@ function Total(qty,ud,total,value){
 											</td>
 											<td class="info">
 												<center>
-													<p class="name">Argert Boja</p>
+													<p class="name"><?php echo "Argert Boja"  ?></p>
 													<p class= "email"> argertboja@yahoo.com</p>
 													<form>
 														<p>Birthday:

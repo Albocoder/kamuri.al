@@ -27,7 +27,7 @@ require_once("encryptor.php");
                 if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
                     $email = $conn->real_escape_string(strtolower(trim($_POST['email'])));
                     $pw = $conn->real_escape_string($_POST['pw']);
-                    $res = $conn->query("SELECT id,email,pw,kryp,verificationCode
+                    $res = $conn->query("SELECT id,email,pw,kryp,status
                      FROM kamuriTBL WHERE email='$email';");
                     $numRows = mysqli_num_rows($res);
                     if($numRows<=0){
@@ -51,7 +51,7 @@ require_once("encryptor.php");
                             $_SESSION['id'] = $tmp['id'];
                             $conn->query("UPDATE kamuriTBL SET lastLoginIP='".$ip."' WHERE email='".$email."';");
                             //if the user's account is still unverified!
-                            if(!is_null($tmp['verificationCode'])){
+                            if(strcmp($tmp['status'],'pen')==0){
                                 $_SESSION['verified'] = false;
                                 header("Location: verify.php");
                             }
