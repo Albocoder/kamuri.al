@@ -41,4 +41,4 @@ CREATE TABLE `kamuriTBL` (
   UNIQUE KEY `email` (`email`,`profpic`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `email_2` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
