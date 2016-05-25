@@ -5,7 +5,6 @@
 	<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
     <link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
-    
 		<title>Kam Uri</title>
 		<!-- This script is for the quantity Price relation -->
 		 <script>
@@ -17,7 +16,13 @@ function Total(qty,ud,total,value){
 }
   </script>
 	</head>
-    
+    <?php
+		session_start();
+		if((!isset($_SESSION['allowed']))
+			||(isset($_SESSION['allowed']) && !$_SESSION['allowed']) 
+			|| ($_SESSION['allowed'] && !$_SESSION['verified'])
+			header("Location: index.php");
+    ?>
     
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
 	<!-- Header Tab -->

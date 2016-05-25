@@ -18,6 +18,13 @@ function Total(qty,ud,total,value){
   </script>
 	</head>
     
+    <?php
+		session_start();
+		if((!isset($_SESSION['allowed']))
+			||(isset($_SESSION['allowed']) && !$_SESSION['allowed']) 
+			|| ($_SESSION['allowed'] && !$_SESSION['verified'])
+			header("Location: index.php");
+    ?>
     
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
 	<!-- Header Tab -->

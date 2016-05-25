@@ -214,7 +214,13 @@ require_once("encryptor.php");?>
 							$numTries = 5;
               				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
 								.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-	            				
+	            				$results = $conn->query("SELECT id FROM 'kamuriTBL' WHERE email = '$email';");
+	              				$temporary = $results->fetch_assoc();
+	              				session_start();
+	              				$userID = $temporary['id'];
+	              				$_SESSION['allowed'] = true;
+	              				$_SESSION['verified'] = false;
+	              				$_SESSION['id'] = $userID;
 	            				if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
 									echo "Could not mail a verification code! Please contact us to verify your account!<br>";
 								}
