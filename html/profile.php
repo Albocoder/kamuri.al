@@ -7,14 +7,14 @@
     <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
 		<title>Kam Uri</title>
 		<!-- This script is for the quantity Price relation -->
-		 <script>
-function Total(qty,ud,total,value){
- qty=document.getElementById(qty);
- ud>0?qty.value++:qty.value--;
- qty.value=Math.max(qty.value,0);
- document.getElementById(total).value=qty.value*value;
-}
-  </script>
+		 <script type="text/javascript">
+			function Total(qty,ud,total,value){
+			 qty=document.getElementById(qty);
+			 ud>0?qty.value++:qty.value--;
+			 qty.value=Math.max(qty.value,0);
+			 document.getElementById(total).value=qty.value*value;
+			}
+		 </script>
 	</head>
     <?php
 		session_start();
@@ -72,8 +72,8 @@ function Total(qty,ud,total,value){
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>	
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -87,11 +87,11 @@ function Total(qty,ud,total,value){
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
-                    <a href="profile_al.html">
+                    <a href="profile_al.php">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
                                     <a>
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
@@ -104,8 +104,8 @@ function Total(qty,ud,total,value){
 								
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 								
@@ -116,7 +116,7 @@ function Total(qty,ud,total,value){
 						</tr>
 					</table>
 				</td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 			
@@ -145,29 +145,27 @@ function Total(qty,ud,total,value){
 									<table width="480" cellpadding="0" cellspacing="0">
 										<tr>
 											<td width="240">
-												<center>
+												<div style="text-align: center;">
 													<div class="prof_pic">
-														<p><img src="../img/prof/profile.jpg" width="100"/></p>
-														<p>
+														<p><img src="../img/prof/defaultPic.jpg" width="100" alt="Profile Picture"/></p>
 															<form >
 																<input type="file" name="pic" accept="image/*">
 																<input type="submit">
 															</form>
-														</p>
 													</div>
-												</center>
+												</div>
 											</td>
 											<td class="info">
-												<center>
+												<div style="text-align: center;">
 													<p class="name"><?php echo "Argert Boja"  ?></p>
 													<p class= "email"> argertboja@yahoo.com</p>
 													<form>
 														<p>Birthday:
 														
-															<input type="date" name="bday">
+															<input type="date" name="bday" title="bday">
 														</p>
-														<p>Adress: 
-															<textarea name="comment" form="usrform" placeholder="Enter your adress" rows="8" cols="28" name="adress"></textarea>
+														<p>Adress:
+															<textarea placeholder="Enter your address" rows="8" cols="28" name="address"></textarea>
 														</p>
 														<p>Telephone:
 															<input type="tel" name="usrtel">
@@ -176,7 +174,7 @@ function Total(qty,ud,total,value){
 															<input type="submit">
 														</p>
 													</form>												
-												</center>
+												</div>
 											</td>
 										</tr>
 									</table>
@@ -191,11 +189,11 @@ function Total(qty,ud,total,value){
 					<table>
 						<tr>
 							<td width="268"></td>
-							<td width="188" class="footerButton"><center> User Agreement </center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> User Agreement</td>
 							<td width="200"></td>
-							<td width="188" class="footerButton"><center> Contact </center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> Contact</td>
 							<td width="200"></td>
-							<td width="188" class="footerButton"><center> Offers </center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> Offers</td>
 							<td width="200"></td>
 						</tr>
 						<tr height="8">
@@ -203,11 +201,11 @@ function Total(qty,ud,total,value){
 						</tr>
 						<tr>
 							<td width="268"></td>
-							<td width="188" class="footerButton"><center> FAQ </center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> FAQ</td>
 							<td width="200"></td>
-							<td width="188" class="footerButton"><center> Social Networks </center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> Social Networks</td>
 							<td width="200"></td>
-							<td width="188" class="footerButton"><center> Developers</center></td>
+							<td width="188" class="footerButton" style="text-align: center;"> Developers</td>
 							<td width="200"></td>
 						</tr>
 						<tr height="8">
@@ -216,7 +214,7 @@ function Total(qty,ud,total,value){
 					</table>
 					<hr class="horizontalLine"/>
 				</td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 		</table>
