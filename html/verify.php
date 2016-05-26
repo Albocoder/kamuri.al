@@ -73,7 +73,8 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, Albocoder<div name="exit" class="exit"><a href="logout.php">
+                            	<div style="margin-left:20px;">Hi, Albocoder<div name="exit" class="exit">
+										<a style="text-decoration: none;" href="logout.php">
 								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
 															  alt="Turn Off"></a></div></div>
     						</td>
