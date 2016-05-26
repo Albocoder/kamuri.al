@@ -114,6 +114,8 @@
 											</td>
 											<td class="info">
 												<?php
+												$picDir = '../img/prof/defaultPic.jpg';
+												$email = 'example@kamuri.al';
 												session_start();
 												if((!isset($_SESSION['allowed']))
 													||(isset($_SESSION['allowed']) && !$_SESSION['allowed'])
@@ -122,8 +124,6 @@
 												else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
 													header("Location: verify.php");
 												else{
-													$picDir = '/img/prof/defaultPic.jpg';
-													$email = 'example@kamuri.al';
 													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														$uid = $_SESSION['id'];
 														$res = $conn->query("SELECT profpic,email

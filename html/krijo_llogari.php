@@ -190,7 +190,7 @@ function get_client_ip_server() {
 																					$msg = "ALB{".$verificationCode."}";
 														              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
 														              					.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-															            				$results = $conn->query("SELECT id FROM 'kamuriTBL' WHERE email = '$email';");
+															            				$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
 															              				$temporary = $results->fetch_assoc();
 															              				session_start();
 															              				$userID = $temporary['id'];
@@ -201,7 +201,7 @@ function get_client_ip_server() {
 																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
 																						}
 															              				else{
-															              					echo "Kodi verifikimit u dergua. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
+															              					echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
 															              					echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
 															              				}
 															              			}

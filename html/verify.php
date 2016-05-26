@@ -73,9 +73,9 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, Albocoder<div name="exit" class="exit">
+                            	<div style="margin-left:20px;">Hi, Albocoder<div name="exit" class="exit"><a href="logout.php">
 								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
-															  alt="Turn Off"></div></div>
+															  alt="Turn Off"></a></div></div>
     						</td>
                         </tr>
                         <!-- Empty row -->
@@ -83,10 +83,14 @@
 					</table>
 
 					<center><table border="1" class="verification_table""><tr><td>
-					<p><center class="hello" margin-top="50px">Hello <class name="user"> Albocoder </class> </center>
+					<p><center class="hello" margin-top="50px">Hello <class name="user"> <?php
+
+							?> </class> </center>
 					<p><center class="code_text" margin-top="50px">Please enter verification </center>
 					<p><center class="code_text" margin-top="50px">code below... </center>
-					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries">8</class></center>
+					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries"><?php
+								
+							?></class></center>
 					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
 					<p><center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center></p></td></tr></table>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
