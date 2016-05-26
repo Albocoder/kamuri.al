@@ -34,9 +34,12 @@
 					</table>
                     <div align="right">
                     <a href="verify_al.php">
-									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="verify.php">
-									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
+						<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" />
+					</a>
+
+					<a href="verify.php">
+						<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" />
+					</a>
                                     
                     </div>
 									
@@ -73,12 +76,12 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, <?php
-										
+                            	<div style="margin-left:20px;">Pershendetje, <?php
+
 
 									?><div name="exit" class="exit">
 										<a style="text-decoration: none;" href="logout.php">
-								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
+								Ckycu &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
 															  alt="Turn Off"></a></div></div>
     						</td>
                         </tr>
@@ -87,12 +90,12 @@
 					</table>
 
 					<center><table border="1" class="verification_table""><tr><td>
-					<p><center class="hello" margin-top="50px">Hello <class name="user"> <?php
+					<p><center class="hello" margin-top="50px">Pershendetje <class name="user"> <?php
 
 							?> </class> </center>
-					<p><center class="code_text" margin-top="50px">Please enter verification </center>
-					<p><center class="code_text" margin-top="50px">code below... </center>
-					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries"><?php
+					<p><center class="code_text" margin-top="50px">Ju lutem fusni kodin e </center>
+					<p><center class="code_text" margin-top="50px">verifikimit poshte </center>
+					<p><center class="code_text" margin-top="50px">Numri i provave: <class name="tries"><?php
 								
 							?></class></center>
 					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
