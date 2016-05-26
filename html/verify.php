@@ -73,9 +73,39 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, <?php
-										
-
+                            	<div style="margin-left:20px;"><?php
+									$expected = 'nd236589ldfmlsd!(#*@#$#;sweksk32432dwe23234';
+									$tries = 0;
+									$email = 'example@kamuri.al';
+									$status = 'pen';
+									if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified']){
+										if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+											$uid = $_SESSION['id'];
+											$res = $conn->query("SELECT status,email,verificationCode,tries
+															FROM kamuriTBL WHERE id = '$uid';");
+											$tmp = $res->fetch_assoc();
+											$status = $tmp['status'];
+											$email = $tmp['email'];
+											$expected = $tmp['verificationCode'];
+											$tries = $tmp['tries'];
+											if($status == 'sus' || $status == 'ban')
+												header("Location: message.php");
+											else if ($status == 'act'){
+												$_SESSION['verified'] = true;
+											}
+										}
+										else{
+											echo "Couldn't connect to database! Please contact us 
+														<a href=\"contactMe.php\">here</a>!";
+											die();
+										}
+									}
+									else{
+										header("Location: index_al.php");
+									}
+									echo "Hi, ";
+									$name = substr($email, 0, strpos($email,'@'));
+									echo $name;
 									?><div name="exit" class="exit">
 										<a style="text-decoration: none;" href="logout.php">
 								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
@@ -88,12 +118,12 @@
 
 					<center><table border="1" class="verification_table""><tr><td>
 					<p><center class="hello" margin-top="50px">Hello <class name="user"> <?php
-
+							echo $name
 							?> </class> </center>
 					<p><center class="code_text" margin-top="50px">Please enter verification </center>
 					<p><center class="code_text" margin-top="50px">code below... </center>
 					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries"><?php
-								
+								echo $tries
 							?></class></center>
 					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
 					<p><center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center></p></td></tr></table>

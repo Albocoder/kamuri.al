@@ -1,4 +1,5 @@
 <?php
+session_start();
     $lastpage = $_SERVER['HTTP_REFERER'];
     if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing!
 <br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
@@ -13,7 +14,6 @@ require_once("encryptor.php");
         else{
             //to limit connections to the database
             //memcache will be used when we get popular
-            session_start();
             if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false && isset($_SESSION['allowed'])
                 && $_SESSION['verified']){
                 if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
@@ -53,7 +53,10 @@ require_once("encryptor.php");
                             if(strcmp($tmp['status'],'pen')==0){
                                 $_SESSION['allowed'] = true;
                                 $_SESSION['verified'] = false;
-                                header("Location: verify.php");
+                                if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
+                                    header("Location: verify.php");
+                                else
+                                    header("Location: verify_al.php");
                             }
                             else{
                                 if(strcmp($tmp['status'],'act'==0)){
