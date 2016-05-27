@@ -106,6 +106,29 @@
 									else{
 										header("Location: index_al.php");
 									}
+
+									////////////////////// Verification logic!!!
+									$userCode = $_POST['vCode'];
+									if(isset($_POST['submit'])){
+										if($tries != 0 ){
+											if($userCode == $expected){
+												$_SESSION['verified'] = true;
+												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
+												echo "Miresevjen me te drejta te plota! Ju befshin mire dhe befshi qejf!";
+												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+											}
+											else{
+												$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
+												echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+											}
+										}
+										//if there are no more tries
+										else{
+
+										}
+									}
+
+
 									echo "Pershendetje, ";
 									$name = substr($email, 0, strpos($email,'@'));
 									echo $name;

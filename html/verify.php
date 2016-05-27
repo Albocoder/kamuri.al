@@ -105,6 +105,28 @@
 									else{
 										header("Location: index.php");
 									}
+									////////////////////// Verification logic!!!
+									$userCode = $_POST['vCode'];
+									if(isset($_POST['submit'])){
+										if($tries != 0 ){
+											if($userCode == $expected){
+												$_SESSION['verified'] = true;
+												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
+												echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
+												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+											}
+											else{
+												$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
+												echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+											}
+										}
+										//if there are no more tries
+										else{
+
+										}
+									}
+
+
 									echo "Hi, ";
 									$name = substr($email, 0, strpos($email,'@'));
 									echo $name;
@@ -119,17 +141,43 @@
 
 					</table>
 
-					<center><table border="1" class="verification_table""><tr><td>
-					<p><center class="hello" margin-top="50px">Hello <class name="user"> <?php
+					<center>
+		<table border="1" class="verification_table"">
+			<tr>
+				<td>
+					<p>
+					<center class="hello" margin-top="50px">Hello <class name="user"> <?php
 							echo $name
-							?> </class> </center>
-					<p><center class="code_text" margin-top="50px">Please enter verification </center>
-					<p><center class="code_text" margin-top="50px">code below... </center>
-					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries"><?php
-								echo $tries
-							?></class></center>
-					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
-					<p><center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center></p></td></tr></table>
+							?> </class>
+					</center>
+
+					<p>
+					<center class="code_text" margin-top="50px">Please enter verification
+					</center>
+
+					<p>
+					<center class="code_text" margin-top="50px">code below...
+					</center>
+					<p>
+					<center class="code_text" margin-top="50px">Number of tries: <class name="tries">
+						<?php
+							echo $tries
+						?></class>
+					</center>
+					<p>
+					<center class="code_text" margin-top="50px">
+
+						<form method="POST" action="verify.php">
+							<input type="text" name="vCode" placeholder="Verification Code"/></center>
+					<p>
+					<center class="code_text" margin-top="50px">
+						<input type="submit" name="submit" />
+						</form>
+					</center>
+					</p>
+				</td>
+			</tr>
+		</table>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 	</body>
