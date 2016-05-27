@@ -115,27 +115,29 @@
 												$_SESSION['verified'] = true;
 												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
 												echo "Miresevjen me te drejta te plota! Ju befshin mire dhe befshi qejf!";
-												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+												echo '<meta http-equiv="refresh" content="5;url=faqja_kryesore.html" />';
+												return;
 											}
 											else{
 												$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
-												echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+												echo '<meta http-equiv="refresh" content="0;url=verify_al.php" />';
+												return;
 											}
 										}
 										//if there are no more tries
 										else{
 											$verificationCode = genSalt(6);
-											$conn->query("UPDATE kamuriTBL SET verificationCode = $verificationCode, 
+											$msg = "ALB{".$verificationCode."}";
+											$conn->query("UPDATE kamuriTBL SET verificationCode = '$verificationCode', 
 												tries = 5 WHERE id = '$uid';");
-											$msg = "ENG{".$verificationCode."}";
 											if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-												echo "Ti i te gjitha mbarove provat. Nje kod i ri verifikimi nuk u dergua ne email. 
-												Ju lutemi na kontaktoni ne per kete problem. Kodi i vjeter nuk punon me!";
+												echo "Ju lutemi na kontaktoni ne per kete problem. Kodi i vjeter nuk punon me!<br>";
 											}
 											else{
-												echo "You are out of tries! Check your mail for the new verification code!";
-												echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
+												echo "Ju i keni mbaruar te gjitha provat! Perdorni kodin e ri qe erdhi ne email.";
+												echo '<meta http-equiv="refresh" content="8;url=verify_al.php" />';
 											}
+											return;
 										}
 									}
 

@@ -76,6 +76,15 @@
                             	<div style="margin-left:20px;">
 								<?php
 									session_start();
+									function genSalt($length = 25) {
+										$characters = '0123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+										$charactersLength = strlen($characters);
+										$randomString = '';
+										for ($i = 0; $i < $length; $i++) {
+											$randomString .= $characters[rand(0, $charactersLength - 1)];
+										}
+										return $randomString;
+									}
 									$expected = 'nd236589ldfmlsd!(#*@#$#;sweksk32432dwe23234';
 									$tries = 0;
 									$email = 'example@kamuri.al';
@@ -99,7 +108,7 @@
 										else{
 											echo "Couldn't connect to database! Please contact us 
 														<a href=\"contactMe.php\">here</a>!";
-											die();
+											return;
 										}
 									}
 									else{
@@ -114,16 +123,18 @@
 												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
 												echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
 												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+												return;
 											}
 											else{
 												$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
 												echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+												return;
 											}
 										}
 										//if there are no more tries
 										else{
 											$verificationCode = genSalt(6);
-											$conn->query("UPDATE kamuriTBL SET verificationCode = $verificationCode, 
+											$conn->query("UPDATE kamuriTBL SET verificationCode = '$verificationCode', 
 												tries = 5 WHERE id = '$uid';");
 											$msg = "ENG{".$verificationCode."}";
 											if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
@@ -132,8 +143,9 @@
 											}
 											else{
 												echo "You are out of tries! Check your mail for the new verification code!";
-												echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
+												echo '<meta http-equiv="refresh" content="8;url=verify.php" />';
 											}
+											return;
 										}
 									}
 
