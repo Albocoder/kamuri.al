@@ -124,7 +124,18 @@
 										}
 										//if there are no more tries
 										else{
-
+											$verificationCode = genSalt(6);
+											$conn->query("UPDATE kamuriTBL SET verificationCode = $verificationCode, 
+												tries = 5 WHERE id = '$uid';");
+											$msg = "ENG{".$verificationCode."}";
+											if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+												echo "Ti i te gjitha mbarove provat. Nje kod i ri verifikimi nuk u dergua ne email. 
+												Ju lutemi na kontaktoni ne per kete problem. Kodi i vjeter nuk punon me!";
+											}
+											else{
+												echo "You are out of tries! Check your mail for the new verification code!";
+												echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
+											}
 										}
 									}
 
