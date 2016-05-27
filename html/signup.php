@@ -226,7 +226,7 @@ require_once("encryptor.php");?>
 								}
 	              				else{
 	              					echo "Welcome to kamuri.al it couldn't be the same without you! Please check the email for verification code!";
-									echo '<meta http-equiv="refresh" content="5;url= verify.php" />';
+									echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
 	              				}
 	              			}
               				else{

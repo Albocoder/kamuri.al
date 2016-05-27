@@ -1,10 +1,9 @@
 <?php
-session_start();
     $lastpage = $_SERVER['HTTP_REFERER'];
     if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing!
 <br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
 require_once("encryptor.php");
-
+    session_start();
     if( isset($_POST['email']) && isset($_POST['pw']) ){
         if(empty($_POST['email']) || empty($_POST['pw']))
             if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
@@ -36,6 +35,8 @@ require_once("encryptor.php");
                         else
                           echo "Kombinim email/password i gabuar!";
                         $_SESSION['allowed'] = false;
+                        $_SESSION['id'] = -1;
+                        $_SESSION['verified'] = false;
                     }
                     else{
                         $tmp = $res->fetch_assoc();
@@ -72,11 +73,15 @@ require_once("encryptor.php");
                                 else if (strcmp($tmp['status'],'kik'==0)) {
                                     //account suspended temporarily 
                                     $_SESSION['allowed'] = false;
+                                    $_SESSION['verified'] = true;
+                                    $res->free();
                                     header("Location: message.php");
                                 }
                                 else{
                                     //account banned permanently
                                     $_SESSION['allowed'] = false;
+                                    $_SESSION['verified'] = false;
+                                    $res->free();
                                     header("Location: message.php");
                                 }
                             }

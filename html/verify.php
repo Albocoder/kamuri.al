@@ -73,12 +73,14 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;"><?php
+                            	<div style="margin-left:20px;">
+								<?php
+									session_start();
 									$expected = 'nd236589ldfmlsd!(#*@#$#;sweksk32432dwe23234';
 									$tries = 0;
 									$email = 'example@kamuri.al';
 									$status = 'pen';
-									if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified']){
+									if($_SESSION['allowed'] == true && $_SESSION['verified']==false){
 										if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 											$uid = $_SESSION['id'];
 											$res = $conn->query("SELECT status,email,verificationCode,tries
@@ -101,12 +103,13 @@
 										}
 									}
 									else{
-										header("Location: index_al.php");
+										header("Location: index.php");
 									}
 									echo "Hi, ";
 									$name = substr($email, 0, strpos($email,'@'));
 									echo $name;
-									?><div name="exit" class="exit">
+								?>
+									<div name="exit" class="exit">
 										<a style="text-decoration: none;" href="logout.php">
 								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
 															  alt="Turn Off"></a></div></div>
