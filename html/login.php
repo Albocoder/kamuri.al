@@ -75,14 +75,14 @@ require_once("encryptor.php");
                                     $_SESSION['allowed'] = false;
                                     $_SESSION['verified'] = true;
                                     $res->free();
-                                    header("Location: message.php");
+                                    header("Location: suspended.php");
                                 }
                                 else{
                                     //account banned permanently
                                     $_SESSION['allowed'] = false;
                                     $_SESSION['verified'] = false;
                                     $res->free();
-                                    header("Location: message.php");
+                                    header("Location: suspended.php");
                                 }
                             }
                         }

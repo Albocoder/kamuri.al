@@ -50,7 +50,7 @@
                     <div align="right">
                     <a href="profile_al.php">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a>
+                                    <a href="profile.php">
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -114,16 +114,11 @@
 											</td>
 											<td class="info">
 												<?php
-												$picDir = '../img/prof/defaultPic.jpg';
-												$email = 'example@kamuri.al';
-												session_start();
-												if((!isset($_SESSION['allowed']))
-													||(isset($_SESSION['allowed']) && !$_SESSION['allowed'])
-													|| ($_SESSION['allowed'] && !$_SESSION['verified']))
-													header("Location: index.php");
-												else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
-													header("Location: verify.php");
-												else{
+												if(isset($_SESSION['allowed'])&&$_SESSION['allowed']
+													&&isset($_SESSION['verified'])&&$_SESSION['verified']){
+													session_start();
+													$picDir = '../img/prof/defaultPic.jpg';
+													$email = 'example@kamuri.al';
 													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														$uid = $_SESSION['id'];
 														$res = $conn->query("SELECT profpic,email
@@ -134,10 +129,16 @@
 													}
 													else{
 														echo "Couldn't connect to database! Notify the admins
-														<a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!";
+														<a href=\"contactMe.php\">here</a>!";
 														die();
 													}
 												}
+												else if(!isset($_SESSION['allowed']))
+													echo '<meta http-equiv="refresh" content="0;url=index.php" />';
+												else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
+													echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+												else
+													echo '<meta http-equiv="refresh" content="0;url=suspended.php" />';
 												?>
 												<div style="text-align: center;">
 													<p class="name"><?php echo substr($email, 0, strpos($email,'@'))  ?></p>
