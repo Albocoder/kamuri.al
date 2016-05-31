@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
+session_start();
 if (!file_exists('encryptor.php')) die("Dicka nuk shkon!<br>Ju lutem na lajmeroni per kete problem!
 <a href=\"contactMe.php\">ketu</a> nese ky problem vazhdon edhe pas rifreskimit te faqes!<br>");
 require_once("encryptor.php");
@@ -65,28 +66,10 @@ function get_client_ip_server() {
 		<title>Kam Uri</title>
 	</head>
 	<body style="background-position:  top; background-image: url('../img/extra/bg.jpg'); background-attachment: fixed; margin-top: 0;">
-	<!-- Facebook Like Script -->
-	<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1006744256080284',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- End of Facebook Like Script -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -117,8 +100,8 @@ function get_client_ip_server() {
 
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 
@@ -128,9 +111,9 @@ function get_client_ip_server() {
 							</td>
 						</tr>
 					</table>
-					<div class="slide"/>
+					<div class="slide"></div>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 
@@ -139,7 +122,7 @@ function get_client_ip_server() {
 		<table class="main_tab" cellpadding="0" cellspacing="0" >
 			<tr>
 				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table  width="1135" height="1008" cellpadding="0" cellspacing="0">
 						<tr>
@@ -188,12 +171,12 @@ function get_client_ip_server() {
 															                        $defaultPic = "userDefault.jpg";
 															                        $numTries = 5;
 																					$msg = "ALB{".$verificationCode."}";
-														              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
-														              					.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-															            				$results = $conn->query("SELECT id FROM 'kamuriTBL' WHERE email = '$email';");
-															              				$temporary = $results->fetch_assoc();
-															              				session_start();
-															              				$userID = $temporary['id'];
+																					if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
+																						."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
+																						$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
+																						$temporary = $results->fetch_assoc();
+																						$userID = $temporary['id'];
+																						$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);");
 															              				$_SESSION['allowed'] = true;
 															              				$_SESSION['verified'] = false;
 															              				$_SESSION['id'] = $userID;
@@ -201,8 +184,8 @@ function get_client_ip_server() {
 																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
 																						}
 															              				else{
-															              					echo "Kodi verifikimit u dergua. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
-															              					echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
+															              					echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
+															              					echo '<meta http-equiv="refresh" content="5;url=verify_al.php" />';
 															              				}
 															              			}
 														              				else{
@@ -326,7 +309,7 @@ function get_client_ip_server() {
 						</tr>
 					</table>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 		</table>

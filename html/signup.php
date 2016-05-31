@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
+session_start();
 if (!file_exists('encryptor.php')) die("Something went wrong or signup page missing!
 <br>Notify the admins <a href=\"contactMe.php\">here</a> if the problem still exists even after refresh!<br>");
 require_once("encryptor.php");?>
@@ -69,8 +70,8 @@ require_once("encryptor.php");?>
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -84,7 +85,7 @@ require_once("encryptor.php");?>
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
@@ -101,8 +102,8 @@ require_once("encryptor.php");?>
 
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 
@@ -112,9 +113,9 @@ require_once("encryptor.php");?>
 							</td>
 						</tr>
 					</table>
-					<div class="slide"/>
+					<div class="slide"></div>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 
@@ -122,8 +123,8 @@ require_once("encryptor.php");?>
 		<!-- Main Tab -->
 		<table class="main_tab" cellpadding="0" cellspacing="0" >
 			<tr>
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table  width="1135" height="1008" cellpadding="0" cellspacing="0">
 						<tr>
@@ -147,7 +148,7 @@ require_once("encryptor.php");?>
          <p class="signup_info">Email *</p>
         <div class="signup__row">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" ></path>
           </svg>
           <input class="signup_email" maxlength="150" name="userEmail" id="user-email" placeholder="Email" type="email" size="50" />
         </div>
@@ -156,7 +157,7 @@ require_once("encryptor.php");?>
         <p class="signup_info">Password *</p>
         <div class="signup__row">
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" ></path>
           </svg>
           <input class="signup_pass" maxlength="30" name="userPw" id="user-pw" placeholder="Password" type="password" size="50" />
         </div>
@@ -165,7 +166,7 @@ require_once("encryptor.php");?>
         <p class="signup_info">Repeat Password *</p>
         <div class="signup__row">
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" ></path>
           </svg>
           <input class="signup_pass" maxlength="30" name="userRepeatPw" id="user-pw-repeat" placeholder="Repeat password" type="password" size="50" />
         </div>
@@ -191,7 +192,7 @@ require_once("encryptor.php");?>
 	      			if($_POST['userPw'] != $_POST['userRepeatPw'])
 	      				echo "Input password mismatch!";
 	      			else{
-	  					if($conn = mysqli_connect("127.0.0.1", "root", "Asdf!234","myDBs")){
+	  					if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 	                        $email = $conn->real_escape_string(strtolower(trim($_POST['userEmail'])));
 	                        $pw = $conn->real_escape_string($_POST['userPw']);
 
@@ -209,15 +210,15 @@ require_once("encryptor.php");?>
 	                        	$role = 4;
 
 							$verificationCode = genSalt(6);
-	                        $defaultPic = "userDefault.jpg";
+	                        $defaultPic = "../img/prof/defaultPic.jpg";
 							$msg = "ENG{".$verificationCode."}";
 							$numTries = 5;
-              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
-								.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-	            				$results = $conn->query("SELECT id FROM 'kamuriTBL' WHERE email = '$email';");
+              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
+								."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
+	            				$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
 	              				$temporary = $results->fetch_assoc();
-	              				session_start();
 	              				$userID = $temporary['id'];
+								$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);");
 	              				$_SESSION['allowed'] = true;
 	              				$_SESSION['verified'] = false;
 	              				$_SESSION['id'] = $userID;
@@ -226,7 +227,7 @@ require_once("encryptor.php");?>
 								}
 	              				else{
 	              					echo "Welcome to kamuri.al it couldn't be the same without you! Please check the email for verification code!";
-									echo '<meta http-equiv="refresh" content="5;url= verify.php" />';
+									echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
 	              				}
 	              			}
               				else{
@@ -300,7 +301,7 @@ require_once("encryptor.php");?>
 						</tr>
 					</table>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 		</table>

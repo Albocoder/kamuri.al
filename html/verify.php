@@ -14,8 +14,8 @@
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>	
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -29,13 +29,13 @@
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
-                    <a>
+                    <a href="verify_al.php">
 									<img alt="" height="34" src="../img/extra/shqip.png" width="34" class="auto-style5" /></a>
-                                    <a href="business_homepage">
+                                    <a href="verify.php">
 									<img alt="" height="34" src="../img/extra/english.png" width="34" class="auto-style5" /></a>
                                     
                     </div>
@@ -46,8 +46,8 @@
 								
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 								
@@ -59,7 +59,7 @@
 						
 					</table>
 				</td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 			
@@ -73,21 +73,134 @@
 						<tr height="18"><td width="1135" height="18"></td></tr>
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="welcome">
-                            	<div style="margin-left:20px;">Hi, Albocoder<class name="exit" class="exit">
-								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"></class></div>
+                            	<div style="margin-left:20px;">
+								<?php
+									session_start();
+									function genSalt($length = 25) {
+										$characters = '0123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+										$charactersLength = strlen($characters);
+										$randomString = '';
+										for ($i = 0; $i < $length; $i++) {
+											$randomString .= $characters[rand(0, $charactersLength - 1)];
+										}
+										return $randomString;
+									}
+									$expected = 'nd236589ldfmlsd!(#*@#$#;sweksk32432dwe23234';
+									$tries = 0;
+									$email = 'example@kamuri.al';
+									$status = 'pen';
+									if($_SESSION['allowed'] == true && $_SESSION['verified']==false){
+										if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+											$uid = $_SESSION['id'];
+											$res = $conn->query("SELECT status,email,verificationCode,tries
+															FROM kamuriTBL WHERE id = '$uid';");
+											$tmp = $res->fetch_assoc();
+											$status = $tmp['status'];
+											$email = $tmp['email'];
+											$expected = $tmp['verificationCode'];
+											$tries = $tmp['tries'];
+											if($status == 'sus' || $status == 'ban')
+												header("Location: suspended.php");
+											else if ($status == 'act'){
+												$_SESSION['verified'] = true;
+											}
+										}
+										else{
+											echo "Couldn't connect to database! Please contact us 
+														<a href=\"contactMe.php\">here</a>!";
+											return;
+										}
+									}
+									else{
+										header("Location: index.php");
+									}
+									////////////////////// Verification logic!!!
+									$userCode = $_POST['vCode'];
+									if(isset($_POST['submit'])){
+										if($tries != 0 ){
+											if($userCode == $expected){
+												$_SESSION['verified'] = true;
+												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
+												echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
+												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+												return;
+											}
+											else{
+												$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
+												echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+												return;
+											}
+										}
+										//if there are no more tries
+										else{
+											$verificationCode = genSalt(6);
+											$conn->query("UPDATE kamuriTBL SET verificationCode = '$verificationCode', 
+												tries = 5 WHERE id = '$uid';");
+											$msg = "ENG{".$verificationCode."}";
+											if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+												echo "Could not mail a new verification code!
+														Please contact us to verify your account now!<br>";
+											}
+											else{
+												echo "You are out of tries! Check your mail for the new verification code!";
+												echo '<meta http-equiv="refresh" content="8;url=verify.php" />';
+											}
+											return;
+										}
+									}
+
+
+									echo "Hi, ";
+									$name = substr($email, 0, strpos($email,'@'));
+									echo $name;
+								?>
+									<div name="exit" class="exit">
+										<a style="text-decoration: none;" href="logout.php">
+								Logout &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
+															  alt="Turn Off"></a></div></div>
     						</td>
                         </tr>
                         <!-- Empty row -->
-						
+
 					</table>
-					<center><table border="1" class="verification_table""><tr><td>
-					<p><center class="hello" margin-top="50px">Hello <class name="user"> Albocoder </class> </center></p>
-					<p><center class="code_text" margin-top="50px">Please enter verification </center></p>
-					<p><center class="code_text" margin-top="50px">code below... </center></p>
-					<p><center class="code_text" margin-top="50px">Number of tries: <class name="tries">8</class></center></p>
-					<p><center class="code_text" margin-top="50px"><form><input type="text" name="verification_code" placeholder="Verification Code"/></form></center></p>
-					<p><center class="code_text" margin-top="50px"><form><input type="submit" name="submit_verification" /></form></center></p></td></tr></table></center></td>			
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
-				<td style="width: 68px">&nbsp;</td>
+
+					<center>
+		<table border="1" class="verification_table"">
+			<tr>
+				<td>
+					<p>
+					<center class="hello" margin-top="50px">Hello <class name="user"> <?php
+							echo $name
+							?> </class>
+					</center>
+
+					<p>
+					<center class="code_text" margin-top="50px">Please enter verification
+					</center>
+
+					<p>
+					<center class="code_text" margin-top="50px">code below...
+					</center>
+					<p>
+					<center class="code_text" margin-top="50px">Number of tries: <class name="tries">
+						<?php
+							echo $tries
+						?></class>
+					</center>
+					<p>
+					<center class="code_text" margin-top="50px">
+
+						<form method="POST" action="verify.php">
+							<input type="text" name="vCode" placeholder="Verification Code"/></center>
+					<p>
+					<center class="code_text" margin-top="50px">
+						<input type="submit" name="submit" />
+						</form>
+					</center>
+					</p>
+				</td>
 			</tr>
 		</table>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
+				<td style="width: 68px">&nbsp;</td>
+	</body>
