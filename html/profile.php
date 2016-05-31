@@ -119,13 +119,27 @@
 													session_start();
 													$picDir = '../img/prof/defaultPic.jpg';
 													$email = 'example@kamuri.al';
+													$dob = '??/??/????';
+													$addr = '????????';
+													$telNo = '(123)45-678-9012';
+													
 													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														$uid = $_SESSION['id'];
-														$res = $conn->query("SELECT profpic,email
+
+														$res = $conn->query("SELECT email
 															FROM kamuriTBL WHERE id = '$uid';");
 														$tmp = $res->fetch_assoc();
-														$picDir = $tmp['profpic'];
 														$email = $tmp['email'];
+														$res->free();
+														$res = $conn->query("SELECT dob, address, telNo, profpic
+															FROM personalData WHERE id = '$uid';");
+														$tmp = $res->fetch_assoc();
+
+														//get the personal data form the second table
+														if($tmp['dob']!=null){$dob = $tmp['dob'];}
+														if($tmp['address']!=null){$addr = $tmp['address'];}
+														if($tmp['telNo']!=null){$telNo = $tmp['telNo'];}
+														if($tmp['profpic']!=null){$picDir = $tmp['profpic'];}
 													}
 													else{
 														echo "Couldn't connect to database! Notify the admins
@@ -143,14 +157,14 @@
 												<div style="text-align: center;">
 													<p class="name"><?php echo substr($email, 0, strpos($email,'@'))  ?></p>
 													<p class= "email"> <?php echo $email ?></p>
-													<form>
-														<p>Birthday:
+													<form action="profile.php" method="POST" enctype="multipart/form-data">
+														<p>Birthday: <?php echo $dob;?>
 															<input type="date" name="bday" title="bday">
 														</p>
-														<p>Adress:
+														<p>Adress: <?php echo $addr;?>
 															<textarea placeholder="Enter your address" rows="8" cols="28" name="address"></textarea>
 														</p>
-														<p>Telephone:
+														<p>Telephone: <?php echo $telNo;?>
 															<input type="tel" name="usrtel">
 														</p>
 														<p>

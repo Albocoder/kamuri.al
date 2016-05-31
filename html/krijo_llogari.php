@@ -171,11 +171,12 @@ function get_client_ip_server() {
 															                        $defaultPic = "userDefault.jpg";
 															                        $numTries = 5;
 																					$msg = "ALB{".$verificationCode."}";
-														              				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt."','','','"
-														              					.$defaultPic."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-															            				$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
-															              				$temporary = $results->fetch_assoc();
-															              				$userID = $temporary['id'];
+																					if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
+																						."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
+																						$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
+																						$temporary = $results->fetch_assoc();
+																						$userID = $temporary['id'];
+																						$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);");
 															              				$_SESSION['allowed'] = true;
 															              				$_SESSION['verified'] = false;
 															              				$_SESSION['id'] = $userID;

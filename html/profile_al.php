@@ -119,17 +119,31 @@
 											session_start();
 											$picDir = '../img/prof/defaultPic.jpg';
 											$email = 'example@kamuri.al';
+											$dob = '??/??/????';
+											$addr = '????????';
+											$telNo = '(+123)45-678-9012';
+
 											if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 												$uid = $_SESSION['id'];
-												$res = $conn->query("SELECT profpic,email
+
+												$res = $conn->query("SELECT email
 															FROM kamuriTBL WHERE id = '$uid';");
 												$tmp = $res->fetch_assoc();
-												$picDir = $tmp['profpic'];
 												$email = $tmp['email'];
+												$res->free();
+												$res = $conn->query("SELECT dob, address, telNo, profpic
+															FROM personalData WHERE id = '$uid';");
+												$tmp = $res->fetch_assoc();
+
+												//get the personal data form the second table
+												if($tmp['dob']!=null){$dob = $tmp['dob'];}
+												if($tmp['address']!=null){$addr = $tmp['address'];}
+												if($tmp['telNo']!=null){$telNo = $tmp['telNo'];}
+												if($tmp['profpic']!=null){$picDir = $tmp['profpic'];}
 											}
 											else{
-												echo "Nuk u lidh me databazen. Na njoftoni 
-														<a href=\"contactMe.php\">ketu</a>!";
+												echo "Couldn't connect to database! Notify the admins
+														<a href=\"contactMe.php\">here</a>!";
 												die();
 											}
 										}
@@ -143,14 +157,14 @@
 										<div style="text-align: center;">
 											<p class="name"><?php echo substr($email, 0, strpos($email,'@'))  ?></p>
 											<p class= "email"> <?php echo $email ?></p>
-											<form>
-												<p>Birthday:
+											<form action="profile.php" method="POST" enctype="multipart/form-data">
+												<p>Ditelindja: <?php echo $dob;?>
 													<input type="date" name="bday" title="bday">
 												</p>
-												<p>Adress:
+												<p>Adresa: <?php echo $addr;?>
 													<textarea placeholder="Enter your address" rows="8" cols="28" name="address"></textarea>
 												</p>
-												<p>Telephone:
+												<p>Telefon: <?php echo $telNo;?>
 													<input type="tel" name="usrtel">
 												</p>
 												<p>
@@ -172,7 +186,7 @@
 			<table>
 				<tr>
 					<td width="268"></td>
-					<td width="188" class="footerButton" style="text-align: center;"> Marreveshja me perdoruesin</td>
+					<td width="188" class="footerButton" style="text-align: center;"> Kontrata Perdoruesit</td>
 					<td width="200"></td>
 					<td width="188" class="footerButton" style="text-align: center;"> Kontakt</td>
 					<td width="200"></td>
@@ -208,7 +222,7 @@
 			<td>
 				<font face="'Lucida Calligraphy'" color="gray" size="3">© 2016<a href="https://www.facebook.com/4LB0C0D3R">
 						AlboCoder</a> & <a href="https://www.facebook.com/abentertainmentab">
-						ABEntertainment </a><font size="2"> All rights reserved</font>
+						ABEntertainment </a><font size="2"> Te drejtat e rezervuara</font>
 				</font>
 			</td>
 		</tr>
