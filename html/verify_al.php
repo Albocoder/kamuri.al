@@ -92,7 +92,7 @@
 											$expected = $tmp['verificationCode'];
 											$tries = $tmp['tries'];
 											if($status == 'sus' || $status == 'ban')
-												header("Location: suspended.php");
+												header("Location: message.php");
 											else if ($status == 'act'){
 												$_SESSION['verified'] = true;
 											}

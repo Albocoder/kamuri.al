@@ -229,10 +229,13 @@ require_once("encryptor.php");?>
 	              					echo "Welcome to kamuri.al it couldn't be the same without you! Please check the email for verification code!";
 									echo '<meta http-equiv="refresh" content="5;url=verify.php" />';
 	              				}
+								$results->free();
+								$results->close();
 	              			}
               				else{
                   				echo "Email is already registered! <br>Notify the admins if problem persists!<br>";
              				}
+							$conn->close();
 	      				}
 	      				else{
 	      					echo "Couldn't connect to database! <br>Notify the admins if problem persists!";

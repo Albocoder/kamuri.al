@@ -5,7 +5,21 @@
 	<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
     <link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
-    
+    <script>
+		function getRestaurants(){
+			if(window.XMLHttpRequest)
+				xhttp = new XMLHttpRequest();
+			else
+				xhttp = new ActiveXObject('Microsoft.XMLHTTP');//for IE9 or below
+			xhttp.onreadystatechange = function () {
+				if(xhttp.readyState == 4 && xhttp.status == 200){
+					document.getElementById('restaurantData').innerHTML = xhttp.responseText;
+				}
+			};
+			xhttp.open('GET', 'searchRestos.inc.php?searchKey='+document.getElementById("cityPicker").value, true);
+			xhttp.send();
+		}
+	</script>
 		<title>Kam Uri</title>
 	</head>
     
@@ -14,8 +28,8 @@
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>	
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -29,7 +43,7 @@
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
@@ -46,8 +60,8 @@
 								
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 								
@@ -80,8 +94,8 @@
 									<div class="tfclear"></div>
 									<form>
 									<div class="cities_list">
-										<input list="cities" name="Cities" placeholder="Chose City"/>
-											<datalist id="cities">
+										<input list="cities" id="cityPicker" name="Cities" placeholder="Chose City"/>
+											<datalist id="cities"  onchange="getRestaurants()">
 												<option value="Tirane" ></option>
 												<option value="Elbasan"></option>
 												<option value="Durres"></option>
@@ -89,14 +103,9 @@
 												<option value="Shkoder"></option>
 											</datalist>
 									</div>
-									<div class="restorant">
+									<div id="autofillRes" class="restorant">
 										<input list="restorant" name="Restorant" placeholder="Restaurant"/>
-											<datalist id="restorant">
-												<option value="Piceri Hallall" ></option>
-												<option value="Kasemi"></option>
-												<option value="Restorant Balla"></option>
-												<option value="Sofra Turke"></option>
-												<option value="MIMI Thai & Chinese"></option>
+											<datalist id="restaurantData">
 											</datalist>
 									</div>
 									</form>
@@ -113,10 +122,10 @@
 										<div id="sliderFrame">
 											<div id="slider" style="margin-top:0px;">
 												<img src="../img/slide/1.jpg" alt="Welcome to kamuri.al" /> 
-												<img src="../img/slide/2.jpg" alt="Quicknees, Quality, Facility!" />
-												<img src="../img/slide/3.jpg" alt="Same Price" />
+												<img src="../img/slide/2.jpg" alt="Quickness, Quality, Facility!" />
+												<img src="../img/slide/3.jpg" alt="Compare Prices" />
 												<img src="../img/slide/4.jpg" alt="In every city!" />
-												<img src="../img/slide/5.jpg" />
+												<img src="../img/slide/5.jpg"  alt="Easy to use"/>
 											</div>        
 										</div>
 										<p>&nbsp;</p>

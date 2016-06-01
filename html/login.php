@@ -16,7 +16,7 @@ require_once("encryptor.php");
             if(isset($_SESSION['allowed']) && $_SESSION['allowed'] != false && isset($_SESSION['allowed'])
                 && $_SESSION['verified']){
                 if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                    header('Location: home_page.html');
+                    header('Location: home_page.php');
                 else
                     header('Location: faqja_kryesore.html');
             }
@@ -66,7 +66,7 @@ require_once("encryptor.php");
                                     $res->free();
                                     //here check for status and redirect accordingly
                                     if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")
-                                        header('Location: home_page.html');
+                                        header('Location: home_page.php');
                                     else
                                         header('Location: faqja_kryesore.html');
                                 }
@@ -75,22 +75,23 @@ require_once("encryptor.php");
                                     $_SESSION['allowed'] = false;
                                     $_SESSION['verified'] = true;
                                     $res->free();
-                                    header("Location: suspended.php");
+                                    header("Location: message.php");
                                 }
                                 else{
                                     //account banned permanently
                                     $_SESSION['allowed'] = false;
                                     $_SESSION['verified'] = false;
                                     $res->free();
-                                    header("Location: suspended.php");
+                                    header("Location: message.php");
                                 }
                             }
                         }
                         else{
                             echo "Kombinim email/password i gabuar!";
-                            $res->free();
                         }
                     }
+                    $res->free();
+                    $conn->close();
                 }
                 else{
                     if (substr($lastpage, strrpos($lastpage, "/")+1) == "index.php")

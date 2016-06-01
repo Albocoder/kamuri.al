@@ -29,8 +29,8 @@
 	<!-- Header Tab -->
 	 	<table class="header_tab" cellpadding="0" cellspacing="0" >
 			<tr>
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table align="left" style="width: 10%">
 						<tr>
@@ -44,7 +44,7 @@
 							<img alt="Twitter" height="25" src="../img/extra/tw.png" width="25" /></td>
 							<td>
 							<img alt="YouTube" height="25" src="../img/extra/yt.png" width="25" /></td>
-							<td class="auto-style1"/>
+							<td class="auto-style1"></td>
 						</tr>
 					</table>
                     <div align="right">
@@ -61,8 +61,8 @@
 
 								<table align="right" width="1135" style="margin-bottom:0px;margin-top:116px; height: 0px;" >
 									<tr>
-										<td width="230" style="height: 35px"/>
-										<td width="900" style="height: 35px"/>
+										<td width="230" style="height: 35px"></td>
+										<td width="900" style="height: 35px"></td>
 									</tr>
 								</table>
 
@@ -73,7 +73,7 @@
 						</tr>
 					</table>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 
@@ -81,8 +81,8 @@
 		<!-- Main Tab -->
 		<table class="main_tab" cellpadding="0" cellspacing="0" >
 			<tr>
-				<td style="width: 68px"/>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td style="width: 68px"></td>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td bgcolor="#FFFFE0" style="margin-top: 0px; margin: 0px 0 0 0; width: 645px; pause-after: inherit;" class="auto-style2">
 					<table  width="1135" height="1008" cellpadding="0" cellspacing="0">
 						<tr>
@@ -102,13 +102,13 @@
       <form action="login.php" method="POST">
         <div class="login__row">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" ></path>
           </svg>
           <input type="text" class="login__input name" name="email" placeholder="Username"/>
         </div>
         <div class="login__row">
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" ></path>
           </svg>
           <input type="password" name="pw"class="login__input pass" placeholder="Password"/>
         </div>
@@ -146,7 +146,7 @@
 								<!-- Continue without account -->
 								<tr>
 									<td width="113" height="28">
-										<div align="center"><a href="home_page.html"><img alt="Continue" height="48" src="../img/extra/continue.jpg" width="313" /></a></div>
+										<div align="center"><a href="home_page.php"><img alt="Continue" height="48" src="../img/extra/continue.jpg" width="313" /></a></div>
 									</td>
 								</tr>
 								<!-- Sponsor part -->
@@ -178,7 +178,7 @@
 						</tr>
 					</table>
 				</td>
-				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"/>
+				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 			</tr>
 		</table>

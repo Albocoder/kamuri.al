@@ -144,15 +144,17 @@
 											else{
 												echo "Couldn't connect to database! Notify the admins
 														<a href=\"contactMe.php\">here</a>!";
+												$conn->close();
 												die();
 											}
+											$conn->close();
 										}
 										else if(!isset($_SESSION['allowed']))
 											echo '<meta http-equiv="refresh" content="0;url=index.php" />';
 										else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
 											echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
 										else
-											echo '<meta http-equiv="refresh" content="0;url=suspended.php" />';
+											echo '<meta http-equiv="refresh" content="0;url=message.php" />';
 										?>
 										<div style="text-align: center;">
 											<p class="name"><?php echo substr($email, 0, strpos($email,'@'))  ?></p>

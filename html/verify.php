@@ -100,7 +100,7 @@
 											$expected = $tmp['verificationCode'];
 											$tries = $tmp['tries'];
 											if($status == 'sus' || $status == 'ban')
-												header("Location: suspended.php");
+												header("Location: message.php");
 											else if ($status == 'act'){
 												$_SESSION['verified'] = true;
 											}
@@ -122,7 +122,7 @@
 												$_SESSION['verified'] = true;
 												$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
 												echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
-												echo '<meta http-equiv="refresh" content="5;url=home_page.html" />';
+												echo '<meta http-equiv="refresh" content="5;url=home_page.php" />';
 												return;
 											}
 											else{
