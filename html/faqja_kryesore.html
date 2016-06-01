@@ -5,6 +5,7 @@
 	<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
     <link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
     <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
+	<script src="../javascript/ajaxRestoCity.js" type="text/jscript"></script>
 
 		<title>Kam Uri</title>
 	</head>
@@ -80,7 +81,8 @@
 									<div class="tfclear"></div>
 									<form>
 									<div class="cities_list">
-										<input list="cities" name="Cities" placeholder="Qyteti"/>
+										<input list="cities" name="Cities" placeholder="Qyteti"
+											   onchange="getRestaurants()" id="cityPicker"/>
 											<datalist id="cities">
 												<option value="Tirane" ></option>
 												<option value="Elbasan"></option>
@@ -90,15 +92,10 @@
 											</datalist>
 									</div>
 									<div class="restorant">
-										<input list="restorant" name="Restorant" placeholder="Restoranti"/>
-										<!-- Add it with php here and also database for restaurants -->
-											<datalist id="restorant">
-												<option value="Piceri Hallall" ></option>
-												<option value="Kasemi"></option>
-												<option value="Restorant Balla"></option>
-												<option value="Sofra Turke"></option>
-												<option value="MIMI Thai & Chinese"></option>
-											</datalist>
+										<input list="restorant" name="Restorant" placeholder="Restaurant"/>
+										<datalist id="restaurantData">
+											<option value="-" ></option>
+										</datalist>
 									</div>
 									</form>
 								</div>

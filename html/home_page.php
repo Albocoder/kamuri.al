@@ -1,25 +1,11 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
-    <link rel="stylesheet" href="css/style_homepage.css">  
-	<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
-    <link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
-    <script src="../javascript/js-image-slider.js" type="text/jscript"></script>
-    <script>
-		function getRestaurants(){
-			if(window.XMLHttpRequest)
-				xhttp = new XMLHttpRequest();
-			else
-				xhttp = new ActiveXObject('Microsoft.XMLHTTP');//for IE9 or below
-			xhttp.onreadystatechange = function () {
-				if(xhttp.readyState == 4 && xhttp.status == 200){
-					document.getElementById('restaurantData').innerHTML = xhttp.responseText;
-				}
-			};
-			xhttp.open('GET', 'searchRestos.inc.php?searchKey='+document.getElementById("cityPicker").value, true);
-			xhttp.send();
-		}
-	</script>
+		<link rel="stylesheet" href="css/style_homepage.css">
+		<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
+		<link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
+		<script src="../javascript/js-image-slider.js" type="text/jscript"></script>
+		<script src="../javascript/ajaxRestoCity.js" type="text/jscript"></script>
 		<title>Kam Uri</title>
 	</head>
     
@@ -94,8 +80,9 @@
 									<div class="tfclear"></div>
 									<form>
 									<div class="cities_list">
-										<input list="cities" id="cityPicker" name="Cities" placeholder="Chose City"/>
-											<datalist id="cities"  onchange="getRestaurants()">
+										<input list="cities" id="cityPicker" onchange="getRestaurants()"
+											   name="Cities" placeholder="Chose City"/>
+											<datalist id="cities">
 												<option value="Tirane" ></option>
 												<option value="Elbasan"></option>
 												<option value="Durres"></option>
@@ -105,8 +92,9 @@
 									</div>
 									<div id="autofillRes" class="restorant">
 										<input list="restorant" name="Restorant" placeholder="Restaurant"/>
-											<datalist id="restaurantData">
-											</datalist>
+										<datalist id="restaurantData">
+											<option value="-" ></option>
+										</datalist>
 									</div>
 									</form>
 								</div>
