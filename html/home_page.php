@@ -90,8 +90,8 @@
 												<option value="Shkoder"></option>
 											</datalist>
 									</div>
-									<div id="autofillRes" class="restorant">
-										<input list="restorant" name="Restorant" placeholder="Restaurant"/>
+									<div  class="restorant">
+										<input list="restorant" id="autofillRes" name="Restorant" placeholder="Restaurant"/>
 										<datalist id="restaurantData">
 											<option value="-" ></option>
 										</datalist>
