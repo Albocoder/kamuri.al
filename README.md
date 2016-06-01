@@ -22,5 +22,6 @@ Ky eshte repository i kamuri.al
 <h2>Todo:</h2>
 1) Rregullo ate headerin "kamuri.al" me 3D etj...<br>
 2) Me shume javascript qe te dali me profesionale<br>
-3) Implemento me shume AJAX me PHP dhe javascript(Per Albocoder-in)<br>
-4) Krijo 2 tabela te tjera si te skica edhe shto 2 kolona me shume te tabela kryesore. (Si te skica)<br>
+3) Ndaj tablen kryesore ne pjese. <br>
+4) Loginin rregulloje te kerkoje me shume info per bizneset<br>
+5) Ndaji php qe jan ndihmese ne nji folder tjeter
