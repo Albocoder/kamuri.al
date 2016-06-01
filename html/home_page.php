@@ -185,7 +185,7 @@
 											<tr>
 												<td height="48">
 													<video width="280" height="158" autoplay loop muted class="video">
-														<source src="../vids/tricks.webm" type="video/webm">
+														<source src="../vids/tricks.ogv" type="video/webm">
 													</video>
 												</td>
 											</tr>
