@@ -91,7 +91,7 @@
 											</datalist>
 									</div>
 									<div  class="restorant">
-										<input list="restorant" id="autofillRes" name="Restorant" placeholder="Restaurant"/>
+										<input list="restaurantData" id="autofillRes" name="Restaurant" placeholder="Restaurant"/>
 										<datalist id="restaurantData">
 											<option value="-" ></option>
 										</datalist>
