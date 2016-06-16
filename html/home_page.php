@@ -74,20 +74,27 @@
                     	<tr height="18">
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="Search">
                             	<div id="tfheader">
-									<form id="tfnewsearch" method="get">
+									<form id="tfnewsearch" method="GET" action="">
 										<input type="text" id="tfq" class="tftextinput2" name="q" size="21" maxlength="120" placeholder="Search food"><input type="submit" value=">" class="tfbutton2">
-									</form>
 									<div class="tfclear"></div>
-									<form>
 									<div class="cities_list">
 										<input list="cities" id="cityPicker" onchange="getRestaurants()"
 											   name="Cities" placeholder="Chose City"/>
 											<datalist id="cities">
-												<option value="Tirane" ></option>
-												<option value="Elbasan"></option>
-												<option value="Durres"></option>
-												<option value="Vlore"></option>
-												<option value="Shkoder"></option>
+												<?php
+													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
+														$q = "SELECT DISTINCT city FROM restaurants";
+														$results = $conn->query($q);
+
+														echo "<option value=\"-\"></option>\n";
+														while($row = $results->fetch_assoc()){
+															echo "<option value=\"".$row['city']."\"></option>\n";
+														}
+													}
+													else{
+														echo "-";
+													}
+												?>
 											</datalist>
 									</div>
 									<div  class="restorant">
