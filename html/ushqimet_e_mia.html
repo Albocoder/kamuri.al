@@ -2,14 +2,13 @@
 <head>
 <link rel="stylesheet" href="css/results.css">  
  <script>
- 
 function Total(qty,ud,total,value){
  qty=document.getElementById(qty);
  ud>0?qty.value++:qty.value--;
  qty.value=Math.max(qty.value,0);
  document.getElementById(total).value=qty.value*value;
 }
-  </script>
+ </script>
 </head>
 <body>
 <table  width="1100" height="26" cellpadding="0" cellspacing="0">
@@ -41,7 +40,7 @@ function Total(qty,ud,total,value){
 						 <td width="26"></td>
 						 <td width="140">
 							<center>
-							<input type='image' name='cancel' id='cancel' src="../img/extra/cancel.png" width="38" height="38"/></center>
+							<input type='image' name="cancel" id="cancel" src="../img/extra/cancel.png" width="38" height="38"/></center>
 						 </td>
 						</tr>
 						<tr height="8"></tr>
@@ -130,18 +129,5 @@ function Total(qty,ud,total,value){
 						 </td>
 						</tr>
 					</table>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 					</body>
 					</html>
