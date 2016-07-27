@@ -114,6 +114,7 @@
 											</td>
 											<td class="info">
 												<?php
+												session_start();
 												if(isset($_SESSION['allowed'])&&$_SESSION['allowed']
 													&&isset($_SESSION['verified'])&&$_SESSION['verified']){
 													session_start();
@@ -121,7 +122,7 @@
 													$email = 'example@kamuri.al';
 													$dob = '??/??/????';
 													$addr = '????????';
-													$telNo = '(123)45-678-9012';
+													$telNo = '???-???-????';
 													
 													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														$uid = $_SESSION['id'];
@@ -144,7 +145,6 @@
 													else{
 														echo "Couldn't connect to database! Notify the admins
 														<a href=\"contactMe.php\">here</a>!";
-														$conn->close();
 														die();
 													}
 													$conn->close();

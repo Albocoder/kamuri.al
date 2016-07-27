@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="css/style_homepage.css">
-		<link rel="icon" href="../img/extra/icon.png" type="image/png" size="16x16"/>
+		<link rel="icon" href="../img/extra/icon.png" type="image/png"/>
 		<link href="css/js-image-slider.css" rel="stylesheet" type="text/css" />
 		<script src="../javascript/js-image-slider.js" type="text/jscript"></script>
 		<script src="../javascript/ajaxRestoCity.js" type="text/jscript"></script>
@@ -75,7 +75,9 @@
                         	<td width="1135" height="28" bgcolor="#FFFFCC" class="Search">
                             	<div id="tfheader">
 									<form id="tfnewsearch" method="GET" action="">
-										<input type="text" id="tfq" class="tftextinput2" name="q" size="21" maxlength="120" placeholder="Search food"><input type="submit" value=">" class="tfbutton2">
+										<input type="text" id="tfq" class="tftextinput2" name="q" size="21"
+											   maxlength="120" placeholder="Search food"><input type="submit" value=">"
+																								class="tfbutton2">
 									<div class="tfclear"></div>
 									<div class="cities_list">
 										<input list="cities" id="cityPicker" onchange="getRestaurants()"
@@ -249,18 +251,18 @@
 				</tr>
 			</table>
 		</center>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+		<!--Start of Tawk.to Script-->
+		<script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/56ff94d43a48b09e318df421/default';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+		</script>
+		<!--End of Tawk.to Script-->
 	</body>
 </html>
