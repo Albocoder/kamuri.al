@@ -53,13 +53,14 @@
 }
 .tftextinput2{
 	margin: 0;
-	padding: 5px 15px;
+	padding:5px 15px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size:14px;
 	color:#666;
 	border:1px solid #daa520; border-right:0px;
 	border-top-left-radius: 5px 5px;
 	border-bottom-left-radius: 5px 5px;
+	margin-bottom:10px;
 }
 .tfbutton2 {
 	margin: 0;
