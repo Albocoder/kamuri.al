@@ -213,12 +213,15 @@ require_once("encryptor.php");?>
 	                        $defaultPic = "../img/prof/defaultPic.jpg";
 							$msg = "ENG{".$verificationCode."}";
 							$numTries = 5;
+							$name = substr($email, 0, strpos($email,'@'));
               				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
-								."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
+								."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")&&
+								$conn->query("INSERT INTO `userInfo`VALUES (NULL,,'".$name."','?????, ??????, ??????'
+								,'".$defaultPic."','".$salt."','06#-##-##-###',0,0,0);")){
 	            				$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
 	              				$temporary = $results->fetch_assoc();
 	              				$userID = $temporary['id'];
-								$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);");
+								//$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);"); //dafuq??
 	              				$_SESSION['allowed'] = true;
 	              				$_SESSION['verified'] = false;
 	              				$_SESSION['id'] = $userID;
