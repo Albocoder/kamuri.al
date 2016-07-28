@@ -140,51 +140,8 @@
 											}
 											return;
 										}
-										////////////////////// Verification logic!!!
-										$userCode = $_POST['vCode'];
-										if(isset($_POST['submit'])){
-											if($tries != 0 ){
-												if($userCode == $expected){
-													$_SESSION['verified'] = true;
-													$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
-													echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
-													echo '<meta http-equiv="refresh" content="5;url=home_page.php" />';
-													return;
-												}
-												else{
-													$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
-													echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
-													return;
-												}
-											}
-											//if there are no more tries
-											else{
-												$verificationCode = genSalt(6);
-												$conn->query("UPDATE kamuriTBL SET verificationCode = '$verificationCode', 
-												tries = 5 WHERE id = '$uid';");
-												$msg = "ENG{".$verificationCode."}";
-												if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-													echo "Could not mail a new verification code!
-														Please contact us to verify your account now!<br>";
-												}
-												else{
-													echo "You are out of tries! Check your mail for the new verification code!";
-													echo '<meta http-equiv="refresh" content="8;url=verify.php" />';
-												}
-												return;
-											}
-										}
-
-
-										echo "Hi, ";
-										$name = substr($email, 0, strpos($email,'@'));
-										echo $name;
 									}
-
-
-									echo "Pershendetje, ";
 									$name = substr($email, 0, strpos($email,'@'));
-									echo $name;
 									?><div name="exit" class="exit">
 										<a style="text-decoration: none;" href="logout.php">
 								Shkycu &nbsp;&nbsp;&nbsp;<img src="../img/extra/exit.png" width="22" height="22"
@@ -197,7 +154,7 @@
 
 					<center><table border="1" class="verification_table""><tr><td>
 					<p><center class="hello" margin-top="50px">Pershendetje <class name="user"> <?php
-								$name
+								echo $name;
 							?> </class> </center>
 					<p><center class="code_text" margin-top="50px">Ju lutem fusni kodin e </center>
 					<p><center class="code_text" margin-top="50px">verifikimit poshte </center>
