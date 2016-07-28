@@ -1,5 +1,16 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
+	<?php
+		session_start();
+		if(isset($_SESSION['allowed'])&&$_SESSION['allowed'])
+			null;
+		else if(!isset($_SESSION['allowed']))
+			echo '<meta http-equiv="refresh" content="0;url=index.php" />';
+		else if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified'])
+			echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+		else
+			echo '<meta http-equiv="refresh" content="0;url=message.php" />';
+	?>
 	<head>
 		<link rel="stylesheet" href="css/style_homepage.css">
 		<link rel="icon" href="../img/extra/icon.png" type="image/png"/>

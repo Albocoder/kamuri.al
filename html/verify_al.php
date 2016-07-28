@@ -81,6 +81,7 @@
 									$tries = 0;
 									$email = 'example@kamuri.al';
 									$status = 'pen';
+									session_start();
 									if(isset($_SESSION['allowed']) && $_SESSION['allowed'] && !$_SESSION['verified']){
 										if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 											$uid = $_SESSION['id'];
@@ -139,6 +140,45 @@
 											}
 											return;
 										}
+										////////////////////// Verification logic!!!
+										$userCode = $_POST['vCode'];
+										if(isset($_POST['submit'])){
+											if($tries != 0 ){
+												if($userCode == $expected){
+													$_SESSION['verified'] = true;
+													$conn->query("UPDATE kamuriTBL SET status = 'act' WHERE id = '$uid';");
+													echo "Welcome as a fully fledged user! Bon Appetite and have fun!";
+													echo '<meta http-equiv="refresh" content="5;url=home_page.php" />';
+													return;
+												}
+												else{
+													$conn->query("UPDATE kamuriTBL SET tries = tries-1 WHERE id = '$uid';");
+													echo '<meta http-equiv="refresh" content="0;url=verify.php" />';
+													return;
+												}
+											}
+											//if there are no more tries
+											else{
+												$verificationCode = genSalt(6);
+												$conn->query("UPDATE kamuriTBL SET verificationCode = '$verificationCode', 
+												tries = 5 WHERE id = '$uid';");
+												$msg = "ENG{".$verificationCode."}";
+												if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+													echo "Could not mail a new verification code!
+														Please contact us to verify your account now!<br>";
+												}
+												else{
+													echo "You are out of tries! Check your mail for the new verification code!";
+													echo '<meta http-equiv="refresh" content="8;url=verify.php" />';
+												}
+												return;
+											}
+										}
+
+
+										echo "Hi, ";
+										$name = substr($email, 0, strpos($email,'@'));
+										echo $name;
 									}
 
 
@@ -162,10 +202,17 @@
 					<p><center class="code_text" margin-top="50px">Ju lutem fusni kodin e </center>
 					<p><center class="code_text" margin-top="50px">verifikimit poshte </center>
 					<p><center class="code_text" margin-top="50px">Numri i provave: <class name="tries"><?php
-							$tries
+							echo $tries;
 							?></class></center>
-					<p><center class="code_text" margin-top="50px"><form><input type="text" name="vCode" placeholder="Verification Code"/></center>
-					<p><center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center></p></td></tr></table>
+					<p><center class="code_text" margin-top="50px">
+						<form method="POST" action="verify_al.php"><input type="text" name="vCode" placeholder="Verification Code"/>
+					</center>
+					<p>
+						<center class="code_text" margin-top="50px"><input type="submit" name="submit" /></form></center>
+					</p>
+				</td>
+			</tr>
+		</table>
 				<td bgcolor="#FFFFE0" style="width: 38px" class="auto-style2"></td>
 				<td style="width: 68px">&nbsp;</td>
 	</body>

@@ -172,21 +172,23 @@ function get_client_ip_server() {
 															                        $numTries = 5;
 																					$msg = "ALB{".$verificationCode."}";
 																					if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
-																						."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")){
-																						$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
-																						$temporary = $results->fetch_assoc();
-																						$userID = $temporary['id'];
-																						$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);");
-															              				$_SESSION['allowed'] = true;
-															              				$_SESSION['verified'] = false;
-															              				$_SESSION['id'] = $userID;
-															            				if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
-																						}
-															              				else{
-															              					echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
-															              					echo '<meta http-equiv="refresh" content="5;url=verify_al.php" />';
-															              				}
+																						."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")&&
+																						$conn->query("INSERT INTO `userInfo`VALUES (NULL,'".$name."','?????, ??????, ??????'
+																								,'".$defaultPic."','06#-##-##-###',0,0,0);")){
+																							$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
+																							$temporary = $results->fetch_assoc();
+																							$userID = $temporary['id'];
+																							//$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);"); //dafuq??
+																							$_SESSION['allowed'] = true;
+																							$_SESSION['verified'] = false;
+																							$_SESSION['id'] = $userID;
+																							if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+																								echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
+																							}
+																							else{
+																								echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
+																								echo '<meta http-equiv="refresh" content="5;url=verify_al.php" />';
+																							}
 															              			}
 														              				else{
 														                  				echo "Emaili ekziston ne databaze!<br>Na njoftoni ne per te rregulluar kete problem!<br>";
