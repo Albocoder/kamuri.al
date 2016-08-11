@@ -123,7 +123,8 @@
 													$dob = '??/??/????';
 													$addr = '????????';
 													$telNo = '???-???-????';
-													
+													$conn = null;
+
 													if($conn = mysqli_connect("localhost", "root", "Asdf!234","myDBs")){
 														$uid = $_SESSION['id'];
 
@@ -147,7 +148,6 @@
 														<a href=\"contactMe.php\">here</a>!";
 														die();
 													}
-													$conn->close();
 												}
 												else if(!isset($_SESSION['allowed']))
 													echo '<meta http-equiv="refresh" content="0;url=index.php" />';
@@ -161,18 +161,33 @@
 													<p class= "email"> <?php echo $email ?></p>
 													<form action="profile.php" method="POST" enctype="multipart/form-data">
 														<p>Birthday: <?php echo $dob;?>
-															<input type="date" name="bday" title="bday">
+															<input type="date" name="bday" title="bday"/>
 														</p>
 														<p>Adress: <?php echo $addr;?>
 															<textarea placeholder="Enter your address" rows="8" cols="28" name="address"></textarea>
 														</p>
+														<?php
+														if(isset($_POST['submit'])){
+															if(conn!=null){
+																$bday = $_POST['bday'];
+																$add = $_POST['address'];
+																$tel = $_POST['usrtel'];
+
+															}
+															else{
+																echo "Couldn't connect to database! Notify the admins
+																	<a href=\"contactMe.php\">here</a>!";
+																die();
+															}
+														}
+														?>
 														<p>Telephone: <?php echo $telNo;?>
-															<input type="tel" name="usrtel">
+															<input type="tel" name="usrtel"/>
 														</p>
 														<p>
-															<input type="submit">
+															<input type="submit" name="submit"/>
 														</p>
-													</form>												
+													</form>
 												</div>
 											</td>
 										</tr>

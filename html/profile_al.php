@@ -142,8 +142,8 @@
 												if($tmp['profpic']!=null){$picDir = $tmp['profpic'];}
 											}
 											else{
-												echo "Couldn't connect to database! Notify the admins
-														<a href=\"contactMe.php\">here</a>!";
+												echo "Nuk u lidh me databazen! Njofto adminat
+														<a href=\"contactMe.php\">ktu</a>!";
 												$conn->close();
 												die();
 											}
@@ -166,6 +166,22 @@
 												<p>Adresa: <?php echo $addr;?>
 													<textarea placeholder="Enter your address" rows="8" cols="28" name="address"></textarea>
 												</p>
+												<?php
+												if(isset($_POST['submit'])){
+													if(conn!=null){
+														$bday = $_POST['bday'];
+														$add = $_POST['address'];
+														$tel = $_POST['usrtel'];
+
+													}
+													else{
+														echo "Nuk u lidh me databazen! Njofto adminat
+														<a href=\"contactMe.php\">ktu</a>!";
+														$conn->close();
+														die();
+													}
+												}
+												?>
 												<p>Telefon: <?php echo $telNo;?>
 													<input type="tel" name="usrtel">
 												</p>

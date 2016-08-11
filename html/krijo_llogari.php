@@ -143,63 +143,63 @@ function get_client_ip_server() {
 														<p class="signup_intro"> <b>te krijuar llogarine</b></p>
 														<font size="1">
 														<?php
-														      	if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
-														      		if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
-														      			echo "Plotesoni te gjitha fushat ju lutem! Dhe pranoni kushtet dhe privatesine.";
-														      		else{
-															      			if($_POST['userPw'] != $_POST['userRepeatPw'])
-															      				echo "Fjalekalimet nuk perputhen!";
-															      			else{
-															  					if($conn = mysqli_connect("127.0.0.1", "root", "Asdf!234","myDBs")){
-															                        $email = $conn->real_escape_string(strtolower(trim($_POST['userEmail'])));
-															                        $pw = $conn->real_escape_string($_POST['userPw']);
+															if(isset($_POST['userEmail'])&&isset($_POST['userPw'])&&isset($_POST['userRepeatPw'])&&isset($_POST['checkBox'])){
+																if(empty($_POST['userEmail'])||empty($_POST['userPw'])||empty($_POST['userRepeatPw']))
+																	echo "Plotesoni te gjitha fushat ju lutem! Dhe pranoni kushtet dhe privatesine.";
+																else{
+																		if($_POST['userPw'] != $_POST['userRepeatPw'])
+																			echo "Fjalekalimet nuk perputhen!";
+																		else{
+																			if($conn = mysqli_connect("127.0.0.1", "root", "Asdf!234","myDBs")){
+																				$email = $conn->real_escape_string(strtolower(trim($_POST['userEmail'])));
+																				$pw = $conn->real_escape_string($_POST['userPw']);
 
-															                        $salt = genSalt(50);
-															                        $pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
-															                        $runs = 1828;
-															                        $key_length = 50;
-															                        $pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
-															                        $ip = getIP_By_Force();
-															                        $role = $_POST['role'];
-															                        $role = trim(strtolower($role));
-															                        if(strcmp($role, 'client') == 0)
-															                        	$role = 3;
-															                        else
-															                        	$role = 4;
+																				$salt = genSalt(50);
+																				$pw = substr($salt,0, 25).$pw.substr($salt,25, 25);
+																				$runs = 1828;
+																				$key_length = 50;
+																				$pw = pbkdf2('sha512', $pw, $salt,$runs, $key_length,false);
+																				$ip = getIP_By_Force();
+																				$role = $_POST['role'];
+																				$role = trim(strtolower($role));
+																				if(strcmp($role, 'client') == 0)
+																					$role = 3;
+																				else
+																					$role = 4;
 
-																					$verificationCode = genSalt(6);
-															                        $defaultPic = "userDefault.jpg";
-															                        $numTries = 5;
-																					$msg = "ALB{".$verificationCode."}";
-																					if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
-																						."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")&&
-																						$conn->query("INSERT INTO `userInfo`VALUES (NULL,'".$name."','?????, ??????, ??????'
-																								,'".$defaultPic."','06#-##-##-###',0,0,0);")){
-																							$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
-																							$temporary = $results->fetch_assoc();
-																							$userID = $temporary['id'];
-																							//$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);"); //dafuq??
-																							$_SESSION['allowed'] = true;
-																							$_SESSION['verified'] = false;
-																							$_SESSION['id'] = $userID;
-																							if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
-																								echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
-																							}
-																							else{
-																								echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
-																								echo '<meta http-equiv="refresh" content="5;url=verify_al.php" />';
-																							}
-															              			}
-														              				else{
-														                  				echo "Emaili ekziston ne databaze!<br>Na njoftoni ne per te rregulluar kete problem!<br>";
-														             				}
-															      				}
-															      				else{
-														                  			echo "Nuk u lidh me databazen!<br>Na dergo nje mesazh per problemin!<br>";
-														             			}
-														      				}
+																				$verificationCode = genSalt(6);
+																				$defaultPic = "userDefault.jpg";
+																				$numTries = 5;
+																				$msg = "ALB{".$verificationCode."}";
+																				if($conn->query("INSERT INTO `kamuriTBL`VALUES (NULL,'pen','".$email."','".$ip."','".$pw."','".$salt
+																					."','-1','-1','".$role."','".$verificationCode."','".$numTries."');")&&
+																					$conn->query("INSERT INTO `userInfo`VALUES (NULL,'".$name."','?????, ??????, ??????'
+																							,'".$defaultPic."','06#-##-##-###',0,0,0);")){
+																						$results = $conn->query("SELECT id FROM kamuriTBL WHERE email = '$email';");
+																						$temporary = $results->fetch_assoc();
+																						$userID = $temporary['id'];
+																						//$conn->query("INSERT INTO `kamuriTBL` VALUES (".$userID.",NULL,NULL,NULL,NULL);"); //dafuq??
+																						$_SESSION['allowed'] = true;
+																						$_SESSION['verified'] = false;
+																						$_SESSION['id'] = $userID;
+																						if(!exec("java -cp /var/www/html/kamuri.al/mailer/toUsers Mail $email $msg", $output)){
+																							echo "Nuk mund te dergohej kodi i verifikimit! Ju lutem na kontaktoni per problemin!<br>";
+																						}
+																						else{
+																							echo "Kodi verifikimit u dergua ne email. Miresevini ne kamuri.al, nuk do te ishte njelloj pa ju";
+																							echo '<meta http-equiv="refresh" content="5;url=verify_al.php" />';
+																						}
+																				}
+																				else{
+																					echo "Emaili ekziston ne databaze!<br>Na njoftoni ne per te rregulluar kete problem!<br>";
+																				}
+																			}
+																			else{
+																				echo "Nuk u lidh me databazen!<br>Na dergo nje mesazh per problemin!<br>";
+																			}
 																		}
 																	}
+																}
 														      ?>
 														</font>
 														<div class="signup__form">
@@ -243,7 +243,7 @@ function get_client_ip_server() {
 																</div>
 																<p>&nbsp;</p>
 																<p>&nbsp;</p>
-																<p class="login__signup" align="left"><input name="checkBox" class="checkbox" type="checkbox"
+																	<p class="login__signup" align="left"><input name="checkBox" class="checkbox" type="checkbox"
 																value="Agree"/> &nbsp; Une pranoj &nbsp;<a><u>Kushtet & Privatesine</u></a></p>
 																<input type="submit" class="signup__submit" value="Krijo Llogari"/>
 															</form>
